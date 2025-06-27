@@ -1,0 +1,6 @@
+---
+- name: Setup Pi-hole DNS server
+  hosts: piholes
+  become: true
+  roles:
+    - pihole

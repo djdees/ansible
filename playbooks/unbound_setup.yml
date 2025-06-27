@@ -1,0 +1,7 @@
+---
+- name: Install and configure Unbound local DNS resolver
+  hosts: piholes  # or all_network_hosts or whatever host/group you target
+  become: true
+
+  roles:
+    - unbound

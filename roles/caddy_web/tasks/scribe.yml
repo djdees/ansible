@@ -1,0 +1,47 @@
+---
+- name: Ensure /var/www/html directory exists
+  file:
+    path: /var/www/html
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+  become: true
+
+- name: Deploy static website files for scribe
+  copy:
+    src: "{{ item }}"
+    dest: "/var/www/html/{{ item }}"
+    owner: www-data
+    group: www-data
+    mode: '0644'
+  loop:
+    - index.html
+    - web-design.html
+    - stylesheets.css
+  become: true
+
+- name: Ensure /data directory exists for external content
+  file:
+    path: /data
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+  become: true
+
+- name: Ensure /data/pdfs directory exists
+  file:
+    path: /data/pdfs
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+  become: true
+
+- name: Ensure /var/www/html/pdfs symlink points to /data/pdfs
+  file:
+    src: /data/pdfs
+    dest: /var/www/html/pdfs
+    state: link
+  become: true

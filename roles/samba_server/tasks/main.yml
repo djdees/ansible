@@ -1,0 +1,8 @@
+---
+- name: Install and configure Samba on Debian-based systems
+  import_tasks: debian_install.yml
+  when: ansible_facts['os_family'] | lower == 'debian'
+
+- name: Configure systemd service for Samba
+  import_tasks: systemd_service.yml
+  when: ansible_facts['os_family'] | lower == 'debian'

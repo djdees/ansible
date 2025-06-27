@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  role_name: language_golang
+  author: Derek Dees
+  description: Install Golang via asdf with multiple versions for each user
+  license: MIT
+  min_ansible_version: "2.12"
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm

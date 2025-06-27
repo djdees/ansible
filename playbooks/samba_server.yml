@@ -1,0 +1,6 @@
+---
+- name: Configure Samba server(s)
+  hosts: samba_servers
+  become: true
+  roles:
+    - samba

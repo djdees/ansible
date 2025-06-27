@@ -1,0 +1,22 @@
+---
+- name: Ensure www-data group exists
+  group:
+    name: www-data
+    state: present
+  become: true
+
+- name: Ensure www-data user exists
+  user:
+    name: www-data
+    group: www-data
+    system: true
+    create_home: false
+    shell: /usr/sbin/nologin
+    state: present
+  become: true
+
+- name: Install Caddy web server
+  package:
+    name: caddy
+    state: present
+  become: true

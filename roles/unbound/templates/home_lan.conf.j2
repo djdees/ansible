@@ -1,0 +1,5 @@
+local-zone: "{{ unbound_local_zone }}" static
+{% for host, ip in unbound_ipv4_addresses.items() %}
+local-data: "{{ host }}.{{ unbound_local_zone }} IN A {{ ip }}"
+local-data-ptr: "{{ ip }} {{ host }}.{{ unbound_local_zone }}"
+{% endfor %}

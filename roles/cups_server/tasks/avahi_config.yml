@@ -1,0 +1,45 @@
+---
+- name: Install avahi-daemon.conf
+  template:
+    src: avahi-daemon.j2
+    dest: /etc/avahi/avahi-daemon.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+  become: true
+
+- name: Install avahi hosts file
+  template:
+    src: avahi.hosts.j2
+    dest: /etc/avahi/hosts
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+  become: true
+
+- name: Deploy HP_LaserJet_5MP service
+  copy:
+    src: HP_LaserJet_5MP.service
+    dest: /etc/avahi/services/HP_LaserJet_5MP.service
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+  become: true
+
+- name: Deploy HP_Officejet_5600_Series service
+  copy:
+    src: HP_Officejet_5600_Series.service
+    dest: /etc/avahi/services/HP_Officejet_5600_Series.service
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+  become: true
+
+- name: Restart Avahi
+  command: echo "Restarting Avahi"
+  notify: "restart avahi-daemon"
+  become: true

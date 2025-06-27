@@ -1,0 +1,12 @@
+---
+- name: Install and configure CUPS
+  import_tasks: cups_install.yml
+
+- name: Configure CUPS configuration files
+  import_tasks: cups_config.yml
+
+- name: Install Avahi for printer discovery
+  import_tasks: avahi_install.yml
+
+- name: Configure Avahi for AirPrint
+  import_tasks: avahi_config.yml

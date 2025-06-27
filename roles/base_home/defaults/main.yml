@@ -1,0 +1,3 @@
+---
+base_home_users: "{{ working_users }}"
+shell: "{{ default_shell }}"

@@ -1,0 +1,51 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Install dependencies
+  apt:
+    name:
+      - curl
+      - sudo
+      - git
+      - dnsutils
+      - lsb-release
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Download Pi-hole install script
+  get_url:
+    url: https://install.pi-hole.net
+    dest: /tmp/pihole_install.sh
+    mode: '0755'
+  become: true
+
+- name: Run Pi-hole install script unattended
+  command: bash /tmp/pihole_install.sh --unattended
+  environment:
+    PIHOLE_WEBPASSWORD: "{{ pihole_admin_password }}"
+    PIHOLE_DNS_: "{{ pihole_dns_servers | join(',') }}"
+  args:
+    creates: /etc/pihole/setupVars.conf
+  become: true
+
+- name: Deploy customized setupVars.conf
+  template:
+    src: setupVars.conf.j2
+    dest: /etc/pihole/setupVars.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart pihole-FTL
+  become: true
+
+- name: Ensure Pi-hole FTL service is started and enabled
+  systemd:
+    name: pihole-FTL
+    state: started
+    enabled: yes
+  become: true

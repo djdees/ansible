@@ -1,0 +1,14 @@
+---
+- name: provide system info.
+  hosts: all
+  tasks:
+    - debug:
+        msg:
+          - "Ansible Machine is {{ ansible_machine }}"
+          - "OS Family is {{ ansible_os_family }}"
+          - "Total Memory (gb) is {{ ansible_memtotal_mb/1024 }}"
+          - "Processor is {{ ansible_processor }}"
+          - "Core count is {{ ansible_processor_cores }}"
+          - "Processor count is {{ ansible_processor_count }}"
+          - "ansible_distribution_release is {{ ansible_distribution_release}}"
+...

@@ -1,0 +1,5 @@
+- name: Install Unbound
+  package:
+    name: unbound
+    state: present
+  become: yes

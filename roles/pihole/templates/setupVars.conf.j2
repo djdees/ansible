@@ -1,0 +1,11 @@
+# Pi-hole Setup Variables
+
+PIHOLE_INTERFACE=eth0
+IPV4_ADDRESS={{ ansible_default_ipv4.address }}/24
+IPV6_ADDRESS=
+QUERY_LOGGING=true
+INSTALL_WEB=true
+WEBPASSWORD={{ pihole_admin_password }}
+DNSMASQ_LISTENING=single
+PIHOLE_DNS_1={{ pihole_dns_servers[0] }}
+PIHOLE_DNS_2={{ pihole_dns_servers[1] }}

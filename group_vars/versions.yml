@@ -1,0 +1,49 @@
+# versions.yml — language and tooling version control
+#
+# Defines per-language version lists, default versions,
+# and optional global or per-language package installs.
+#
+# Example structure:
+#
+# <language>_versions:
+#   - "<version>"
+#   - "<version>"
+# <language>_default_version: "<version>"
+# <language>_packages:
+#   - "<package>"
+#   - "<package>"
+#
+# Supported languages:
+# - python
+# - golang
+# (extend as needed: rust, nodejs, etc.)
+#
+# Notes:
+# - Always quote version strings to avoid YAML type issues.
+# - The 'packages' list is optional — omit or leave empty ([])
+#   if no global packages should be installed for that language.
+# - This file is consumed by language-specific roles
+#   and should be kept consistent.
+
+python_versions:
+  - "3.12.3"
+  - "3.11.9"
+python_default_version: "3.12.3"
+python_packages:
+  - "ruff"
+  - "virtualenv"
+
+golang_default_version: "1.22.4"
+golang_versions:
+  - "1.22.4"
+  - "1.21.10"
+golang_packages: []
+
+nodejs_versions:
+  - "20.5.1"
+  - "18.16.1"
+nodejs_default_version: "20.5.1"
+nodejs_packages:
+  - "docusaurus"
+  - "npm-check-updates"
+  - "typescript"

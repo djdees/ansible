@@ -1,0 +1,7 @@
+- name: Deploy local zone records
+  template:
+    src: home_lan.conf.j2
+    dest: /etc/unbound/unbound.conf.d/home_lan.conf
+    mode: '0644'
+  notify: restart unbound
+  become: true

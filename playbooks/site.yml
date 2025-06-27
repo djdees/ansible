@@ -1,0 +1,28 @@
+---
+- name: Configure lab Raspberry Pi nodes
+  hosts: lab
+  become: true
+  roles:
+    - base_pi
+    - base_home
+    - network_config
+    - package_maintenance
+
+- name: Configure Pi-hole servers
+  hosts: piholes
+  become: true
+  roles:
+    - pihole
+    - unbound
+
+- name: Configure document servers
+  hosts: document_servers
+  become: true
+  roles:
+    - caddy_web
+
+- name: Configure print servers
+  hosts: print_servers
+  become: true
+  roles:
+    - cups

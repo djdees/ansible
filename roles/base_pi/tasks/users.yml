@@ -1,0 +1,37 @@
+---
+- name: Ensure user accounts exist
+  user:
+    name: "{{ user.name }}"
+    group: "{{ user.group }}"
+    shell: "{{ user.shell }}"
+    create_home: yes
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+  become: true
+
+- name: Ensure admin group exists
+  group:
+    name: admin
+    state: present
+  become: true
+
+- name: Add users to admin group
+  user:
+    name: "{{ user.name }}"
+    groups: admin
+    append: true
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+  when: user.group == 'admin'
+  become: true
+
+- name: Allow passwordless sudo for admin group
+  copy:
+    dest: /etc/sudoers.d/admin
+    content: '%%admin ALL=(ALL) NOPASSWD: ALL'
+    owner: root
+    group: root
+    mode: '0440'
+  become: true

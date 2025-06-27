@@ -1,0 +1,6 @@
+# ~/.zprofile
+
+# Run .zshrc for interactive shells
+if [[ -o interactive ]]; then
+  source ~/.zshrc
+fi

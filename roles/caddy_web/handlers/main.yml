@@ -1,0 +1,17 @@
+---
+- name: Reload systemd
+  command: systemctl daemon-reload
+  become: true
+
+- name: Restart mount-data
+  systemd:
+    name: data.mount
+    state: restarted
+  become: true
+
+- name: Restart Caddy
+  systemd:
+    name: caddy
+    state: restarted
+    enabled: true
+  become: true

@@ -1,0 +1,9 @@
+---
+- name: Setup dev box tools and python environment
+  hosts: devhosts
+  become: true
+  roles:
+    - asdf
+    - dev-tools
+    - language-python
+    - language-golang

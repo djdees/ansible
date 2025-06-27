@@ -1,0 +1,9 @@
+default_shell: bash
+
+users:
+  - name: fixer
+    group: admin
+    shell: "{{ shell_paths[default_shell] }}"
+  - name: djdees
+    group: admin
+    shell: "{{ shell_paths[default_shell] }}"

@@ -1,0 +1,27 @@
+---
+- name: Install Samba packages
+  apt:
+    name: samba
+    state: latest
+    update_cache: yes
+    autoremove: yes
+    autoclean: yes
+  become: true
+
+- name: Install custom smb.conf
+  template:
+    src: smb.j2
+    dest: /etc/samba/smb.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+  become: true
+
+- name: Create Samba spool directory
+  file:
+    path: /var/spool/samba
+    mode: '1777'
+    owner: root
+    group: root
+  become: true

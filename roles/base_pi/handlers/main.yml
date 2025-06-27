@@ -1,0 +1,14 @@
+---
+- name: restart sshd
+  service:
+    name: ssh
+    state: restarted
+    enabled: yes
+  become: true
+
+- name: restart systemd-timesyncd.service
+  systemd:
+    name: systemd-timesyncd.service
+    state: restarted
+    enabled: yes
+  become: true

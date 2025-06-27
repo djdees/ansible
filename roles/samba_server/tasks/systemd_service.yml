@@ -1,0 +1,14 @@
+---
+- name: Ensure Samba services are enabled and started
+  systemd:
+    name: smbd
+    state: started
+    enabled: true
+  become: true
+
+- name: Ensure nmbd service is enabled and started
+  systemd:
+    name: nmbd
+    state: started
+    enabled: true
+  become: true

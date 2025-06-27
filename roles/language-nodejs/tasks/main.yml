@@ -1,0 +1,38 @@
+---
+- name: Install Node.js plugin for asdf
+  ansible.builtin.shell: >
+    . {{ asdf_root }}/asdf.sh && asdf plugin-add nodejs || true
+  environment:
+    ASDF_ROOT: "{{ asdf_root }}"
+  args:
+    warn: false
+  changed_when: false
+  become: false
+
+- name: Install Node.js versions
+  ansible.builtin.shell: >
+    . {{ asdf_root }}/asdf.sh && asdf install nodejs {{ item }} || true
+  loop: "{{ nodejs_versions }}"
+  environment:
+    ASDF_ROOT: "{{ asdf_root }}"
+  args:
+    warn: false
+  become: false
+  changed_when: false
+
+- name: Set default Node.js global version
+  ansible.builtin.shell: >
+    . {{ asdf_root }}/asdf.sh && asdf global nodejs {{ nodejs_default_version }}
+  environment:
+    ASDF_ROOT: "{{ asdf_root }}"
+  become: false
+  changed_when: false
+
+- name: Install global npm packages
+  ansible.builtin.shell: >
+    . {{ asdf_root }}/asdf.sh && asdf global nodejs {{ nodejs_default_version }} && npm install -g {{ item }}
+  loop: "{{ nodejs_packages }}"
+  environment:
+    ASDF_ROOT: "{{ asdf_root }}"
+  become: false
+  changed_when: false

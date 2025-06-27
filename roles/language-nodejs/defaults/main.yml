@@ -1,0 +1,14 @@
+---
+# Default Node.js versions to install
+nodejs_versions:
+  - "20.5.1"
+  - "18.16.1"
+
+# Default Node.js global version
+nodejs_default_version: "20.5.1"
+
+# Global npm packages to install
+nodejs_packages:
+  - "docusaurus"
+  - "npm-check-updates"
+  - "typescript"

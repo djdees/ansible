@@ -1,0 +1,15 @@
+- name: Configure static IP on selected hosts
+  hosts: "{{ target_hosts | default('lab') }}"
+  gather_facts: no
+
+  roles:
+    - network-config
+
+- name: Prompt to update inventory
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - debug:
+        msg: |
+          Static IP configuration applied and hosts rebooted.
+          Please update your inventory file's ansible_host entries for hosts in group '{{ target_hosts | default('lab') }}'.

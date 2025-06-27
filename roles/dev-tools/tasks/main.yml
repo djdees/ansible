@@ -1,0 +1,15 @@
+---
+- name: Install system packages for dev tools
+  apt:
+    name:
+      - git
+      - jq
+      - csvkit
+    state: present
+    update_cache: yes
+  become: true
+
+- name: (Optional) Install tools via pip or other methods if needed per user
+  # For this example, no user-specific install needed for these tools
+  debug:
+    msg: "No per-user install needed for dev-tools"

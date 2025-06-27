@@ -1,0 +1,39 @@
+---
+- name: Ensure Python versions are installed via asdf
+  ansible.builtin.command:
+    cmd: ". $HOME/.asdf/asdf.sh && asdf install python {{ version }}"
+  become: true
+  become_user: "{{ user }}"
+  environment:
+    HOME: "/home/{{ user }}"
+  loop: "{{ users | product(python_versions) | list }}"
+  loop_control:
+    loop_var: pair
+  vars:
+    user: "{{ pair.0 }}"
+    version: "{{ pair.1 }}"
+
+- name: Set global Python version for each user
+  ansible.builtin.command:
+    cmd: ". $HOME/.asdf/asdf.sh && asdf global python {{ python_default_version }}"
+  become: true
+  become_user: "{{ user }}"
+  environment:
+    HOME: "/home/{{ user }}"
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+
+- name: Install Python packages for each user
+  ansible.builtin.pip:
+    name: "{{ package }}"
+    executable: "/home/{{ user }}/.asdf/shims/pip"
+    state: latest
+  become: true
+  become_user: "{{ user }}"
+  loop: "{{ users | product(python_packages) | list }}"
+  loop_control:
+    loop_var: pair
+  vars:
+    user: "{{ pair.0 }}"
+    package: "{{ pair.1 }}"

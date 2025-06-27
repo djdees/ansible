@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: "Derek Dees"
+  description: "Initial base configuration for Raspberry Pi systems running Raspbian/Ubuntu"
+  company: "HomeLab"
+  license: "MIT"
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Debian
+      versions:
+        - bookworm
+        - bullseye
+
+dependencies:
+  - role: network_config

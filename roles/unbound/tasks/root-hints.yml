@@ -1,0 +1,7 @@
+- name: Download root hints file
+  get_url:
+    url: "{{ root_hints_url }}"
+    dest: /var/lib/unbound/root.hints
+    mode: '0644'
+  notify: restart unbound
+  become: yes

@@ -1,0 +1,27 @@
+---
+- name: Update Apt cache (valid for 1 hour)
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  become: true
+  tags:
+    - maintenance
+    - update
+
+- name: Perform full dist-upgrade
+  apt:
+    upgrade: dist
+  become: true
+  tags:
+    - maintenance
+    - upgrade
+
+- name: Auto remove unused packages
+  apt:
+    autoremove: yes
+  register: apt_autoremove_result
+  changed_when: "'packages will be REMOVED' in apt_autoremove_result.stdout"
+  become: true
+  tags:
+    - maintenance
+    - autoremove

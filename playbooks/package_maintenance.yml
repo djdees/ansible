@@ -1,0 +1,12 @@
+---
+- name: Perform system maintenance on Debian-based hosts
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    ansible_os_family: "{{ ansible_facts['os_family'] | lower }}"
+  tasks:
+    - name: Run maintenance role on Debian/Raspbian hosts only
+      import_role:
+        name: maintenance
+      when: ansible_os_family == 'debian'

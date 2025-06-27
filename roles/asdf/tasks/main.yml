@@ -1,0 +1,5 @@
+- name: Install asdf for each working user
+  include_tasks: user_install.yml
+  loop: "{{ asdf_users }}"
+  loop_control:
+    loop_var: user

@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: "Derek Dees"
+  description: "Install and configure asdf version manager for multi-language tooling"
+  company: "HomeLab"
+  license: "MIT"
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Debian
+      versions:
+        - bookworm
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - jammy
+        - focal
+
+dependencies: []

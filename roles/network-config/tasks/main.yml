@@ -1,0 +1,24 @@
+- name: Configure static IP with systemd-networkd
+  template:
+    src: static.network.j2
+    dest: /etc/systemd/network/eth0.network
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart networking
+
+- name: Enable and start systemd-networkd
+  systemd:
+    name: systemd-networkd
+    enabled: yes
+    state: started
+
+- name: Ensure systemd-resolved is enabled
+  systemd:
+    name: systemd-resolved
+    enabled: yes
+    state: started
+
+- name: Reboot to apply new network config
+  reboot:
+    reboot_timeout: 120

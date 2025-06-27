@@ -1,0 +1,11 @@
+# Main site on scribe.home.arpa and IP access
+scribe.home.arpa {{ ansible_default_ipv4.address }} {
+    root * /var/www/html
+    file_server
+}
+
+# theCity site on theCity.home.arpa
+theCity.home.arpa {
+    root * /data/theCity
+    file_server
+}

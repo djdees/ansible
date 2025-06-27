@@ -1,0 +1,12 @@
+---
+- name: Restart Samba smbd
+  systemd:
+    name: smbd
+    state: restarted
+  become: true
+
+- name: Restart Samba nmbd
+  systemd:
+    name: nmbd
+    state: restarted
+  become: true

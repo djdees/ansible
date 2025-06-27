@@ -1,0 +1,47 @@
+- name: Ensure asdf is installed for {{ user }}
+  git:
+    repo: 'https://github.com/asdf-vm/asdf.git'
+    dest: "/home/{{ user }}/.asdf"
+    version: v0.14.0
+  become: true
+  become_user: "{{ user }}"
+
+- name: Ensure asdf init in .bashrc for {{ user }}
+  lineinfile:
+    path: "/home/{{ user }}/.bashrc"
+    line: '. $HOME/.asdf/asdf.sh'
+    state: present
+  become: true
+  become_user: "{{ user }}"
+
+- name: Ensure asdf init in .zshrc for {{ user }}
+  lineinfile:
+    path: "/home/{{ user }}/.zshrc"
+    line: '. $HOME/.asdf/asdf.sh'
+    state: present
+  become: true
+  become_user: "{{ user }}"
+
+- name: Install asdf plugins for {{ user }}
+  loop: "{{ asdf_versions.keys() | list }}"
+  command: "asdf plugin-add {{ item }} || true"
+  args:
+    chdir: "/home/{{ user }}"
+  become: true
+  become_user: "{{ user }}"
+
+- name: Install tools for {{ user }}
+  loop: "{{ asdf_versions | dict2items }}"
+  command: "asdf install {{ item.key }} {{ item.value }}"
+  args:
+    chdir: "/home/{{ user }}"
+  become: true
+  become_user: "{{ user }}"
+
+- name: Set global versions for {{ user }}
+  loop: "{{ asdf_versions | dict2items }}"
+  command: "asdf global {{ item.key }} {{ item.value }}"
+  args:
+    chdir: "/home/{{ user }}"
+  become: true
+  become_user: "{{ user }}"

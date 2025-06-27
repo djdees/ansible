@@ -1,0 +1,6 @@
+---
+- name: Deploy and configure Caddy web server on PDF servers
+  hosts: document_server
+  become: true
+  roles:
+    - caddy_web

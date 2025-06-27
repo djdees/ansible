@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  role_name: samba
+  author: Derek Dees
+  description: Install and configure Samba server on Debian-based systems.
+  company: "HomeLab"
+  license: "MIT"
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Debian
+      versions:
+        - bookworm
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - jammy
+        - focal
+
+dependencies: []

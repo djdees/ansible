@@ -1,0 +1,7 @@
+---
+- name: Install and configure asdf on lab systems
+  hosts: lab
+  become: true
+
+  roles:
+    - role: asdf

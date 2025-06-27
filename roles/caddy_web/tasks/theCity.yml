@@ -1,0 +1,9 @@
+---
+- name: Ensure /data/theCity directory exists
+  file:
+    path: /data/theCity
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+  become: true

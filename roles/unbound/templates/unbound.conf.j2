@@ -1,0 +1,22 @@
+server:
+  interface: 127.0.0.1
+  port: {{ unbound_port }}
+  do-ip4: {{ do_ip4 }}
+  do-ip6: {{ do_ip6 }}
+  prefer-ip6: {{ prefer_ip6 }}
+  do-udp: {{ do_udp }}
+  do-tcp: {{ do_tcp }}
+  root-hints: "/var/lib/unbound/root.hints"
+  harden-glue: yes
+  harden-dnssec-stripped: yes
+  use-caps-for-id: no
+  edns-buffer-size: 1472
+  prefetch: yes
+  num-threads: {{ num_threads }}
+  so-rcvbuf: {{ so_rcvbuf }}
+  private-address: 192.168.0.0/16
+  private-address: 169.254.0.0/16
+  private-address: 172.16.0.0/12
+  private-address: 10.0.0.0/8
+  private-address: fd00::/8
+  private-address: fe80::/10

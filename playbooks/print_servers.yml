@@ -1,0 +1,8 @@
+---
+- name: Configure Print Servers
+  hosts: print_servers
+  become: true
+
+  roles:
+    - package_maintenance  # optional if you want to ensure system is up-to-date first
+    - cups

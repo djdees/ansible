@@ -1,0 +1,16 @@
+---
+- name: restart cups
+  systemd:
+    name: cups
+    state: restarted
+    enabled: true
+  become: true
+  listen: restart cups
+
+- name: restart avahi-daemon
+  systemd:
+    name: avahi-daemon
+    state: restarted
+    enabled: true
+  become: true
+  listen: restart avahi-daemon

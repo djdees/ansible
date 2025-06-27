@@ -1,0 +1,35 @@
+---
+- name: Install cupsd.conf
+  template:
+    src: cupsd.j2
+    dest: /etc/cups/cupsd.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+  become: true
+
+- name: Install cups-browsed.conf
+  template:
+    src: cups-browsed.j2
+    dest: /etc/cups/cups-browsed.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+  become: true
+
+- name: Install cups-files.conf
+  template:
+    src: cups-files.j2
+    dest: /etc/cups/cups-files.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+  become: true
+
+- name: Restart CUPS
+  command: echo "Restarting CUPS"
+  notify: "restart cups"
+  become: true

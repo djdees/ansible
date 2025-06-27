@@ -1,0 +1,5 @@
+ansible_user: fixer
+ansible_group: admin
+static_ip: 192.168.1.83
+role: print_server
+shell: bash

@@ -1,0 +1,20 @@
+---
+- name: Load bash shell config for users
+  import_tasks: bash.yml
+  when: shell == 'bash'
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+
+- name: Load zsh shell config for users
+  import_tasks: zsh.yml
+  when: shell == 'zsh'
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+
+- name: Load vim config for users
+  import_tasks: vim.yml
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user

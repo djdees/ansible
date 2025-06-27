@@ -1,0 +1,9 @@
+---
+- name: Copy .vimrc for {{ user.name }}
+  copy:
+    src: vimrc
+    dest: "/home/{{ user.name }}/.vimrc"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    mode: '0644'
+  become: true

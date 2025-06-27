@@ -1,0 +1,7 @@
+- name: Test connection to Pi
+  hosts: pi00
+  gather_facts: yes
+  tasks:
+    - name: Print new IP fact
+      debug:
+        msg: "Connected to {{ ansible_default_ipv4.address }}"

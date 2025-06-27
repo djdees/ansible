@@ -1,0 +1,34 @@
+---
+- name: Ensure Golang versions are installed via asdf
+  ansible.builtin.command:
+    cmd: ". $HOME/.asdf/asdf.sh && asdf install golang {{ pair.1 }}"
+  become: true
+  become_user: "{{ pair.0 }}"
+  environment:
+    HOME: "/home/{{ pair.0 }}"
+  loop: "{{ users | product(golang_versions) | list }}"
+  loop_control:
+    loop_var: pair
+
+- name: Set global Golang version for each user
+  ansible.builtin.command:
+    cmd: ". $HOME/.asdf/asdf.sh && asdf global golang {{ golang_default_version }}"
+  become: true
+  become_user: "{{ user }}"
+  environment:
+    HOME: "/home/{{ user }}"
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+
+- name: Install Go packages for each user (if any)
+  ansible.builtin.command:
+    cmd: ". $HOME/.asdf/asdf.sh && go install {{ item }}"
+  become: true
+  become_user: "{{ user }}"
+  environment:
+    HOME: "/home/{{ user }}"
+  loop: "{{ golang_packages }}"
+  loop_control:
+    loop_var: item
+  when: golang_packages | length > 0

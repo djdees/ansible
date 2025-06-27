@@ -1,0 +1,47 @@
+- name: Deploy custom MOTD
+  copy:
+    src: motd
+    dest: /etc/motd
+    backup: yes
+    force: yes
+    mode: '0644'
+    owner: root
+    group: root
+  become: true
+  tags:
+    - setup
+
+- name: Create timesyncd drop-in directory
+  file:
+    path: /usr/local/lib/systemd/timesyncd.conf.d/
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+  become: true
+  tags:
+    - setup
+
+- name: Deploy custom timesyncd.conf
+  copy:
+    src: timesyncd.conf
+    dest: /usr/local/lib/systemd/timesyncd.conf.d/timesyncd.conf
+    backup: yes
+    force: yes
+    mode: '0644'
+    owner: root
+    group: root
+  become: true
+  notify:
+    - restart systemd-timesyncd.service
+  tags:
+    - setup
+
+- name: Enable NTP if disabled
+  command: timedatectl set-ntp true
+  when: >
+    "'Network time on: no' in
+    lookup('pipe', 'timedatectl status')"
+  become: true
+  tags:
+    - setup

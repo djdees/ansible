@@ -1,0 +1,19 @@
+---
+- name: Deploy systemd mount unit for /data
+  template:
+    src: data.mount.j2
+    dest: /etc/systemd/system/data.mount
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  notify:
+    - Reload systemd
+    - Restart mount-data
+
+- name: Enable and start data.mount unit
+  systemd:
+    name: data.mount
+    enabled: true
+    state: started
+  become: true

@@ -1,0 +1,8 @@
+---
+python_default_version: "3.12.3"
+python_versions:
+  - "3.12.3"
+  - "3.11.9"
+python_packages:
+  - ruff
+  - virtualenv

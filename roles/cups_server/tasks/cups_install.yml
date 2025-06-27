@@ -1,0 +1,21 @@
+---
+- name: Install CUPS packages
+  apt:
+    name: cups
+    state: latest
+    update_cache: true
+    autoremove: true
+    autoclean: true
+  become: true
+
+- name: Install hplip and hpijs-ppds
+  apt:
+    name:
+      - hplip
+      - hplip-data
+      - hpijs-ppds
+    state: latest
+    update_cache: true
+    autoremove: true
+    autoclean: true
+  become: true

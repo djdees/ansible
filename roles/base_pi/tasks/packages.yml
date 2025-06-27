@@ -1,0 +1,18 @@
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Autoremove unused packages
+  apt:
+    autoremove: yes
+  register: apt_result
+  changed_when: "'packages will be REMOVED' in apt_result.stdout"
+  become: true
+
+- name: Install git and python3
+  apt:
+    name:
+      - git
+    state: present
+  become: true

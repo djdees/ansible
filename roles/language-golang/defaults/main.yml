@@ -1,0 +1,6 @@
+---
+golang_default_version: "1.22.4"
+golang_versions:
+  - "1.22.4"
+  - "1.21.10"
+golang_packages: []

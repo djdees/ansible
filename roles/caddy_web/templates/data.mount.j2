@@ -1,0 +1,12 @@
+[Unit]
+Description=Mount external SSD on /data
+After=local-fs.target
+
+[Mount]
+What=/dev/disk/by-uuid/{{ DATA_DISK_UUID }}
+Where=/data
+Type=ext4
+Options=defaults,noatime
+
+[Install]
+WantedBy=multi-user.target

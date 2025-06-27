@@ -1,0 +1,37 @@
+# ~/.zshrc
+
+# Enable colors in ls, grep, etc.
+autoload -Uz colors && colors
+
+# Set history size
+HISTSIZE=4000
+SAVEHIST=4000
+HISTFILE=~/.zsh_history
+
+# Set prompt
+PROMPT='%n@%m:%~ %# '
+
+# Enable command correction
+setopt CORRECT
+
+# Enable extended globbing
+setopt EXTENDED_GLOB
+
+# Enable completion
+autoload -Uz compinit && compinit
+
+# Keybindings: vi mode
+bindkey -v
+
+# Aliases
+alias ll='ls -lh'
+alias la='ls -A'
+alias grep='grep --color=auto'
+
+# Source aliases if available
+if [ -f ~/.aliases ]; then
+  source ~/.aliases
+fi
+
+# Editor preference
+export EDITOR=vi

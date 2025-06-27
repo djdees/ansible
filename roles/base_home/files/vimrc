@@ -1,0 +1,31 @@
+" Basic settings
+set number
+set wrap
+set encoding=utf-8
+set mouse=a
+set wildmenu
+set lazyredraw
+set showmatch
+set laststatus=2
+set ruler
+
+" Colorscheme
+try
+  colorscheme slate
+catch
+endtry
+
+syntax enable
+filetype plugin indent on
+
+" Tabs
+set tabstop=2
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set autoindent
+set smartindent
+
+" Misc
+set history=500
+set hlsearch
