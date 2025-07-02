@@ -1,18 +1,12 @@
 ---
-- name: Deploy custom sshd_config
-  copy:
-    src: sshd_config
+- name: Deploy custom sshd_config template
+  template:
+    src: sshd_config.j2
     dest: /etc/ssh/sshd_config
     owner: root
     group: root
     mode: '0600'
     backup: yes
-  notify: restart sshd
+  notify: Restart sshd
   become: true
 
-- name: Restart SSH
-  systemd:
-    name: ssh
-    state: restarted
-  listen: restart sshd
-  become: true

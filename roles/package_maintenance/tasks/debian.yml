@@ -8,9 +8,9 @@
     - maintenance
     - update
 
-- name: Perform full dist-upgrade
+- name: Upgrade packages (dist-upgrade if enabled)
   apt:
-    upgrade: dist
+    upgrade: "{{ 'dist' if use_dist_upgrade else 'yes' }}"
   become: true
   tags:
     - maintenance

@@ -8,5 +8,5 @@
   tasks:
     - name: Run maintenance role on Debian/Raspbian hosts only
       import_role:
-        name: maintenance
+        name: package_maintenance
       when: ansible_os_family == 'debian'

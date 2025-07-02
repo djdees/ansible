@@ -1,0 +1,2 @@
+---
+inspec_version: "{{ inspec_default_version }}"

@@ -1,4 +1,4 @@
 ---
 asdf_version: "v0.14.0"
-asdf_users: "{{ working_users }}"
+asdf_users: "{{ users }}"
 asdf_shell: "{{ shell | default('bash') }}"

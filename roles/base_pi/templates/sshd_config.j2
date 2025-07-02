@@ -1,0 +1,27 @@
+# OpenSSH server configuration
+# Managed by Ansible
+
+Port 22
+Protocol 2
+PermitRootLogin no
+MaxAuthTries 3
+MaxSessions 10
+PubkeyAuthentication yes
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM yes
+AllowTcpForwarding {{ ssh_allow_tcp_forwarding | default('no') }}
+X11Forwarding {{ ssh_x11_forwarding | default('no') }}
+AllowAgentForwarding {{ ssh_allow_agent_forwarding | default('no') }}
+PermitTunnel {{ ssh_permit_tunnel | default('no') }}
+UseDNS {{ ssh_use_dns | default('no') }}
+PrintMotd no
+PrintLastLog yes
+ClientAliveInterval {{ ssh_client_alive_interval | default(300) }}
+ClientAliveCountMax {{ ssh_client_alive_count_max | default(0) }}
+LoginGraceTime 30
+Compression delayed
+Subsystem sftp /usr/lib/openssh/sftp-server
+
+# Only allow these users to SSH
+AllowUsers {% for user in users %}{{ user.name }} {% endfor %}

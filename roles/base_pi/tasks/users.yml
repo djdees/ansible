@@ -1,4 +1,10 @@
 ---
+- name: Ensure admin group exists
+  group:
+    name: admin
+    state: present
+  become: true
+
 - name: Ensure user accounts exist
   user:
     name: "{{ user.name }}"
@@ -10,13 +16,29 @@
     loop_var: user
   become: true
 
-- name: Ensure admin group exists
-  group:
-    name: admin
-    state: present
+- name: Ensure .ssh directory exists for each user
+  file:
+    path: "/home/{{ user.name }}/.ssh"
+    state: directory
+    mode: "0700"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
   become: true
 
-- name: Add users to admin group
+- name: Install standard public SSH key for all users
+  authorized_key:
+    user: "{{ user.name }}"
+    key: "{{ lookup('file', ssh_public_key_path) }}"
+    state: present
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+  become: true
+
+- name: Add users to admin group (if applicable)
   user:
     name: "{{ user.name }}"
     groups: admin
@@ -27,11 +49,13 @@
   when: user.group == 'admin'
   become: true
 
-- name: Allow passwordless sudo for admin group
+- name: Deploy passwordless sudo config for admin group
   copy:
     dest: /etc/sudoers.d/admin
-    content: '%%admin ALL=(ALL) NOPASSWD: ALL'
+    content: |
+      %admin ALL=(ALL) NOPASSWD: ALL
     owner: root
     group: root
     mode: '0440'
+    validate: '/usr/sbin/visudo -cf %s'
   become: true

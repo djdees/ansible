@@ -12,4 +12,4 @@ galaxy_info:
         - bullseye
 
 dependencies:
-  - role: network_config
+  - role: network-config

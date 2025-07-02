@@ -1,0 +1,40 @@
+---
+- name: Ensure local SSH key exists and distribute to remote hosts
+  hosts: all
+  gather_facts: no
+  vars:
+    ssh_key_path: "{{ lookup('env','HOME') + '/.ssh/id_rsa' }}"
+  tasks:
+
+    - name: Check if SSH private key exists locally
+      stat:
+        path: "{{ ssh_key_path }}"
+      register: ssh_key
+
+    - name: Generate SSH key pair if not present
+      command: ssh-keygen -t rsa -b 4096 -f "{{ ssh_key_path }}" -N ""
+      delegate_to: localhost
+      when: not ssh_key.stat.exists
+      changed_when: true
+
+    - name: Read the public key content
+      slurp:
+        src: "{{ ssh_key_path }}.pub"
+      delegate_to: localhost
+      register: public_key
+
+    - name: Ensure .ssh directory exists for fixer user on remote host
+      file:
+        path: /home/fixer/.ssh
+        state: directory
+        mode: '0700'
+        owner: fixer
+        group: fixer
+      become: true
+
+    - name: Add public key to authorized_keys for fixer user
+      authorized_key:
+        user: fixer
+        key: "{{ public_key.content | b64decode }}"
+        state: present
+      become: true

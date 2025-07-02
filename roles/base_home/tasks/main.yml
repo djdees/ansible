@@ -1,20 +1,26 @@
 ---
+- name: Manage groups for user accounts.
+  include_tasks: groups.yml
+
+- name: Manage user accounts
+  include_tasks: users.yml
+
 - name: Load bash shell config for users
-  import_tasks: bash.yml
+  include_tasks: bash.yml
   when: shell == 'bash'
   loop: "{{ users }}"
   loop_control:
     loop_var: user
 
 - name: Load zsh shell config for users
-  import_tasks: zsh.yml
+  include_tasks: zsh.yml
   when: shell == 'zsh'
   loop: "{{ users }}"
   loop_control:
     loop_var: user
 
 - name: Load vim config for users
-  import_tasks: vim.yml
+  include_tasks: vim.yml
   loop: "{{ users }}"
   loop_control:
     loop_var: user

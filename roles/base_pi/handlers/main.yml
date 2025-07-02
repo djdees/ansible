@@ -1,14 +1,25 @@
 ---
-- name: restart sshd
-  service:
-    name: ssh
-    state: restarted
-    enabled: yes
-  become: true
-
 - name: restart systemd-timesyncd.service
   systemd:
     name: systemd-timesyncd.service
     state: restarted
     enabled: yes
   become: true
+
+# roles/base_pi/handlers/main.yml
+- name: Restart sshd
+  systemd:
+    name: ssh
+    state: restarted
+  become: true
+
+- name: reboot system
+  reboot:
+    reboot_timeout: 300
+  become: true
+  when: reboot_after_wireless_disable | default(true)
+
+
+- name: wait for system to come back online
+  wait_for_connection:
+    timeout: 300

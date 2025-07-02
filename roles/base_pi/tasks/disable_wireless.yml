@@ -1,0 +1,20 @@
+- name: Disable wireless kernel module via modprobe blacklist
+  copy:
+    dest: /etc/modprobe.d/disable-wireless.conf
+    content: |
+      # Disable wireless modules
+      blacklist brcmfmac
+      blacklist brcmutil
+      blacklist cfg80211
+      blacklist mac80211
+      blacklist rfkill
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  tags:
+    - wireless
+  notify:
+    - reboot system
+  when: reboot_after_wireless_disable | default(true)
+

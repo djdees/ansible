@@ -1,0 +1,32 @@
+---
+- name: Ensure required dependencies for InSpec install
+  apt:
+    name: curl
+    state: present
+  become: true
+
+- name: Check if InSpec is installed
+  command: inspec version
+  register: inspec_version_check
+  failed_when: false
+  changed_when: false
+
+- name: Install InSpec if version is not {{ inspec_version }}
+  when: inspec_version_check.stdout is not search(inspec_version)
+  block:
+    - name: Download InSpec {{ inspec_version }}
+      get_url:
+        url: "https://packages.chef.io/files/stable/inspec/{{ inspec_version }}/ubuntu/22.04/inspec_{{ inspec_version }}-1_amd64.deb"
+        dest: "/tmp/inspec_{{ inspec_version }}.deb"
+      become: true
+
+    - name: Install InSpec .deb package
+      apt:
+        deb: "/tmp/inspec_{{ inspec_version }}.deb"
+      become: true
+
+    - name: Remove downloaded InSpec package file
+      file:
+        path: "/tmp/inspec_{{ inspec_version }}.deb"
+        state: absent
+      become: true

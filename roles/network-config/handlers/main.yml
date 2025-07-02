@@ -1,0 +1,14 @@
+- name: Restart networking
+  systemd:
+    name: systemd-networkd
+    state: restarted
+  become: true
+  listen: Restart networking
+  notify: Conditionally reboot system
+
+- name: Conditionally reboot system
+  reboot:
+    reboot_timeout: 120
+  become: true
+  when: force_network_reboot | default(false)
+  listen: Conditionally reboot system

@@ -1,0 +1,7 @@
+- name: Ensure required system groups exist
+  group:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ standard_groups }}"
+  become: true
+

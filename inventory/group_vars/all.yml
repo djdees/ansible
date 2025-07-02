@@ -1,0 +1,55 @@
+# group_vars/all.yml
+---
+# Default shell for users
+default_shell: bash
+
+# Mapping shell names to executable paths
+shell_paths:
+  bash: /bin/bash
+  zsh: /bin/zsh
+  fish: /usr/bin/fish
+
+# Whether to use 'dist-upgrade' or regular 'upgrade' with apt
+use_dist_upgrade: false
+
+# Python interpreter to use on managed hosts
+ansible_python_interpreter: /usr/bin/python3
+
+# User accounts configuration
+users:
+  - name: fixer
+    group: admin
+    shell: "{{ shell_paths[default_shell] }}"
+  - name: djdees
+    group: admin
+    shell: "{{ shell_paths[default_shell] }}"
+
+# System groups to ensure exist on hosts
+standard_groups:
+  - admin
+  - sudo
+
+# Default remote user and group for ansible connections
+ansible_user: fixer
+ansible_group: admin
+
+# Network settings
+gateway: 192.168.1.5
+dns_servers:
+  - 192.168.1.8
+  - 1.1.1.1
+  - 8.8.8.8
+reboot_after_wireless_disable: true
+force_network_reboot: false
+
+# SSH Settings
+ssh_allow_tcp_forwarding: "no"
+ssh_x11_forwarding: "no"
+ssh_allow_agent_forwarding: "no"
+ssh_permit_tunnel: "no"
+ssh_use_dns: "no"
+ssh_client_alive_interval: 300
+ssh_client_alive_count_max: 0
+# SSH public key to install for all managed users
+ssh_public_key_path: "/home/djdees/.ssh/id_ed25519.pub"
+

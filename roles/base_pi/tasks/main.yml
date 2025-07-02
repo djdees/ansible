@@ -1,5 +1,20 @@
 ---
 # roles/base_pi/tasks/main.yml
+- name: Debug current Ansible user
+  debug:
+    msg: "Running as {{ ansible_user_id }}"
+
+- name: Ensure sudo group has passwordless sudo
+  copy:
+    dest: /etc/sudoers.d/010_sudo_nopasswd
+    content: "%sudo ALL=(ALL) NOPASSWD: ALL\n"
+    owner: root
+    group: root
+    mode: '0440'
+  become: true
+
+## note: Network is automatically configured since
+## meta/main.yml has it as a dependency.
 
 - name: Set up user accounts
   import_tasks: users.yml
@@ -7,11 +22,11 @@
 - name: Configure SSH daemon
   import_tasks: sshd_config.yml
 
+- name: Configure sudo 
+  import_tasks: sudo_config.yml
+
 - name: Install base packages
   import_tasks: packages.yml
-
-- name: Configure network
-  import_tasks: network.yml
 
 - name: Disable wireless interfaces
   import_tasks: disable_wireless.yml

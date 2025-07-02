@@ -1,4 +1,0 @@
-shell_paths:
-  bash: /bin/bash
-  zsh: /bin/zsh
-  fish: /usr/bin/fish

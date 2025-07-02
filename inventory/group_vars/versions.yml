@@ -47,3 +47,5 @@ nodejs_packages:
   - "docusaurus"
   - "npm-check-updates"
   - "typescript"
+inspec_default_version: "6.10.40"
+

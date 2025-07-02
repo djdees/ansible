@@ -1,0 +1,58 @@
+---
+- name: Ensure admin group exists
+  group:
+    name: admin
+    state: present
+  become: true
+
+- name: Ensure sudo group exists
+  group:
+    name: sudo
+    state: present
+  become: true
+
+- name: Ensure user accounts exist with proper shell and group
+  user:
+    name: "{{ user.name }}"
+    group: "{{ user.group | default('users') }}"
+    shell: "{{ user.shell }}"
+    groups: sudo
+    append: yes
+    state: present
+    create_home: yes
+  become: true
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+
+- name: Allow passwordless sudo for each user
+  copy:
+    dest: "/etc/sudoers.d/{{ user.name }}"
+    content: "{{ user.name }} ALL=(ALL) NOPASSWD:ALL\n"
+    owner: root
+    group: root
+    mode: '0440'
+  become: true
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+
+- name: Ensure authorized_keys exists for each user (if key file present)
+  ansible.builtin.stat:
+    path: "files/ssh_keys/{{ user.name }}.pub"
+  register: user_key
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+  delegate_to: localhost
+
+- name: Install authorized_keys for user if key file exists
+  authorized_key:
+    user: "{{ user.name }}"
+    state: present
+    key: "{{ lookup('file', 'files/ssh_keys/' + user.name + '.pub') }}"
+  when: user_key.results[loop.index0].stat.exists
+  become: true
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
