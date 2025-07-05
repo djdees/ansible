@@ -20593,3 +20593,293 @@ The offending line appears to be:
 2025-07-02 14:17:51,591 p=9380 u=djdees n=ansible | META: ran handlers
 2025-07-02 14:17:51,593 p=9380 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
 2025-07-02 14:17:51,594 p=9380 u=djdees n=ansible | pihole                     : ok=23   changed=6    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+2025-07-02 14:31:47,959 p=9658 u=djdees n=ansible | ERROR! the role 'base_network' was not found in ansible.legacy:/home/djdees/ansible/playbooks/roles:/home/djdees/ansible/roles:/home/djdees/ansible/roles:/home/djdees/ansible/playbooks
+
+The error appears to be in '/home/djdees/ansible/roles/pihole/meta/main.yml': line 19, column 5, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+dependencies:
+  - role: base_network
+    ^ here
+
+2025-07-02 14:32:32,268 p=9680 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-02 14:32:32,291 p=9680 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-02 14:32:38,572 p=9680 u=djdees n=ansible | ok: [pihole]
+2025-07-02 14:32:38,588 p=9680 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-02 14:32:41,394 p=9680 u=djdees n=ansible | ok: [pihole]
+2025-07-02 14:32:41,423 p=9680 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-02 14:32:45,430 p=9680 u=djdees n=ansible | ok: [pihole]
+2025-07-02 14:32:45,444 p=9680 u=djdees n=ansible | TASK [network-config : Gather service facts] ************************************************************************************
+2025-07-02 14:32:58,941 p=9680 u=djdees n=ansible | ok: [pihole]
+2025-07-02 14:32:58,956 p=9680 u=djdees n=ansible | TASK [network-config : Start and enable systemd-resolved (if present)] **********************************************************
+2025-07-02 14:32:58,994 p=9680 u=djdees n=ansible | skipping: [pihole]
+2025-07-02 14:32:59,011 p=9680 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf symlink if it exists] ************************************************************
+2025-07-02 14:32:59,062 p=9680 u=djdees n=ansible | skipping: [pihole]
+2025-07-02 14:32:59,080 p=9680 u=djdees n=ansible | TASK [network-config : Configure /etc/resolv.conf] ******************************************************************************
+2025-07-02 14:33:01,472 p=9680 u=djdees n=ansible | ok: [pihole]
+2025-07-02 14:33:01,489 p=9680 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-02 14:33:16,857 p=9680 u=djdees n=ansible | ok: [pihole]
+2025-07-02 14:33:16,870 p=9680 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-02 14:35:01,609 p=9680 u=djdees n=ansible | changed: [pihole]
+2025-07-02 14:35:01,626 p=9680 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-02 14:35:05,238 p=9680 u=djdees n=ansible | [WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created with a mode of 0700, this may cause issues when
+running as another user. To avoid this, create the remote_tmp dir with the correct permissions manually
+
+2025-07-02 14:35:05,238 p=9680 u=djdees n=ansible | changed: [pihole]
+2025-07-02 14:35:05,250 p=9680 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-02 14:37:22,496 p=9680 u=djdees n=ansible | fatal: [pihole]: FAILED! => {"changed": true, "cmd": ["bash", "/tmp/pihole_install.sh", "--unattended"], "delta": "0:02:15.979642", "end": "2025-07-02 14:37:20.915448", "msg": "non-zero return code", "rc": 1, "start": "2025-07-02 14:35:04.935806", "stderr": "Error opening terminal: unknown.", "stderr_lines": ["Error opening terminal: unknown."], "stdout": "\n  [\u001b[1;32m✓\u001b[0m] Root user check\n\n        \u001b[1;32m.;;,.\n        .ccccc:,.\n         :cccclll:.      ..,,\n          :ccccclll.   ;ooodc\n           'ccll:;ll .oooodc\n             .;cll.;;looo:.\n                 \u001b[1;31m.. ','.\n                .',,,,,,'.\n              .',,,,,,,,,,.\n            .',,,,,,,,,,,,....\n          ....''',,,,,,,'.......\n        .........  ....  .........\n        ..........      ..........\n        ..........      ..........\n        .........  ....  .........\n          ........,,,,,,,'......\n            ....',,,,,,,,,,,,.\n               .',,,,,,,,,'.\n                .',,,,,,'.\n                  ..'''.\u001b[0m\n\n  [i] SELinux not detected\u001b[0m\n  [i] Update local cache of available packages...\r\u001b[K  [\u001b[1;32m✓\u001b[0m] Update local cache of available packages\n\n  [i] Checking apt-get for upgraded packages...\r\u001b[K  [\u001b[1;32m✓\u001b[0m] Checking apt-get for upgraded packages... 4 updates available\n  [i] \u001b[1;32mIt is recommended to update your OS after installing the Pi-hole!\u001b[0m\n\n  [i] Building dependency package pihole-meta.deb...\r\u001b[K  [\u001b[1;32m✓\u001b[0m] Building dependency package pihole-meta.deb\n  [i] Installing Pi-hole dependency package...\r\u001b[K  [\u001b[1;32m✓\u001b[0m] Installing Pi-hole dependency package\n\n  [i] Installer exited at static IP message.", "stdout_lines": ["", "  [\u001b[1;32m✓\u001b[0m] Root user check", "", "        \u001b[1;32m.;;,.", "        .ccccc:,.", "         :cccclll:.      ..,,", "          :ccccclll.   ;ooodc", "           'ccll:;ll .oooodc", "             .;cll.;;looo:.", "                 \u001b[1;31m.. ','.", "                .',,,,,,'.", "              .',,,,,,,,,,.", "            .',,,,,,,,,,,,....", "          ....''',,,,,,,'.......", "        .........  ....  .........", "        ..........      ..........", "        ..........      ..........", "        .........  ....  .........", "          ........,,,,,,,'......", "            ....',,,,,,,,,,,,.", "               .',,,,,,,,,'.", "                .',,,,,,'.", "                  ..'''.\u001b[0m", "", "  [i] SELinux not detected\u001b[0m", "  [i] Update local cache of available packages...", "\u001b[K  [\u001b[1;32m✓\u001b[0m] Update local cache of available packages", "", "  [i] Checking apt-get for upgraded packages...", "\u001b[K  [\u001b[1;32m✓\u001b[0m] Checking apt-get for upgraded packages... 4 updates available", "  [i] \u001b[1;32mIt is recommended to update your OS after installing the Pi-hole!\u001b[0m", "", "  [i] Building dependency package pihole-meta.deb...", "\u001b[K  [\u001b[1;32m✓\u001b[0m] Building dependency package pihole-meta.deb", "  [i] Installing Pi-hole dependency package...", "\u001b[K  [\u001b[1;32m✓\u001b[0m] Installing Pi-hole dependency package", "", "  [i] Installer exited at static IP message."]}
+2025-07-02 14:37:22,497 p=9680 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-02 14:37:22,497 p=9680 u=djdees n=ansible | pihole                     : ok=8    changed=2    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-07-02 15:09:39,254 p=9801 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-02 15:09:39,269 p=9801 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-02 15:09:47,384 p=9801 u=djdees n=ansible | ok: [pihole]
+2025-07-02 15:09:47,401 p=9801 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-02 15:09:50,160 p=9801 u=djdees n=ansible | ok: [pihole]
+2025-07-02 15:09:50,168 p=9801 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-02 15:09:54,109 p=9801 u=djdees n=ansible | ok: [pihole]
+2025-07-02 15:09:54,117 p=9801 u=djdees n=ansible | TASK [network-config : Gather service facts] ************************************************************************************
+2025-07-02 15:10:10,434 p=9801 u=djdees n=ansible | ok: [pihole]
+2025-07-02 15:10:10,449 p=9801 u=djdees n=ansible | TASK [network-config : Start and enable systemd-resolved (if present)] **********************************************************
+2025-07-02 15:10:10,483 p=9801 u=djdees n=ansible | skipping: [pihole]
+2025-07-02 15:10:10,500 p=9801 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf symlink if it exists] ************************************************************
+2025-07-02 15:10:10,555 p=9801 u=djdees n=ansible | skipping: [pihole]
+2025-07-02 15:10:10,572 p=9801 u=djdees n=ansible | TASK [network-config : Configure /etc/resolv.conf] ******************************************************************************
+2025-07-02 15:10:13,469 p=9801 u=djdees n=ansible | ok: [pihole]
+2025-07-02 15:10:13,485 p=9801 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-02 15:10:23,290 p=9801 u=djdees n=ansible | ok: [pihole]
+2025-07-02 15:10:23,304 p=9801 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-02 15:10:33,963 p=9801 u=djdees n=ansible | ok: [pihole]
+2025-07-02 15:10:33,974 p=9801 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-02 15:10:37,209 p=9801 u=djdees n=ansible | ok: [pihole]
+2025-07-02 15:10:37,228 p=9801 u=djdees n=ansible | TASK [pihole : Ensure /etc/pihole directory exists] *****************************************************************************
+2025-07-02 15:10:38,529 p=9801 u=djdees n=ansible | changed: [pihole]
+2025-07-02 15:10:38,543 p=9801 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf before install] *****************************************************************
+2025-07-02 15:10:41,130 p=9801 u=djdees n=ansible | changed: [pihole]
+2025-07-02 15:10:41,143 p=9801 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-02 15:14:48,567 p=9801 u=djdees n=ansible | changed: [pihole]
+2025-07-02 15:14:48,578 p=9801 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] ***************************************************************
+2025-07-02 15:14:52,185 p=9801 u=djdees n=ansible | ok: [pihole]
+2025-07-02 15:14:52,213 p=9801 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-02 15:14:52,213 p=9801 u=djdees n=ansible | pihole                     : ok=12   changed=3    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+2025-07-02 16:51:27,000 p=9958 u=djdees n=ansible | ERROR! the playbook: playbooks/unbound.yml could not be found
+2025-07-02 16:51:49,036 p=9969 u=djdees n=ansible | ERROR! the role 'base_network' was not found in ansible.legacy:/home/djdees/ansible/playbooks/roles:/home/djdees/ansible/roles:/home/djdees/ansible/roles:/home/djdees/ansible/playbooks
+
+The error appears to be in '/home/djdees/ansible/roles/unbound/meta/main.yml': line 19, column 5, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+dependencies:
+  - role: base_network
+    ^ here
+
+2025-07-02 16:52:16,881 p=9989 u=djdees n=ansible | ERROR! the role 'network_config' was not found in ansible.legacy:/home/djdees/ansible/playbooks/roles:/home/djdees/ansible/roles:/home/djdees/ansible/roles:/home/djdees/ansible/playbooks
+
+The error appears to be in '/home/djdees/ansible/roles/unbound/meta/main.yml': line 19, column 5, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+dependencies:
+  - role: network_config
+    ^ here
+
+2025-07-02 16:52:49,791 p=9999 u=djdees n=ansible | PLAY [Install and configure Unbound local DNS resolver] *************************************************************************
+2025-07-02 16:52:49,809 p=9999 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-02 16:52:54,914 p=9999 u=djdees n=ansible | ok: [pihole]
+2025-07-02 16:52:54,932 p=9999 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-02 16:52:57,654 p=9999 u=djdees n=ansible | ok: [pihole]
+2025-07-02 16:52:57,663 p=9999 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-02 16:53:01,552 p=9999 u=djdees n=ansible | ok: [pihole]
+2025-07-02 16:53:01,565 p=9999 u=djdees n=ansible | TASK [network-config : Gather service facts] ************************************************************************************
+2025-07-02 16:53:14,609 p=9999 u=djdees n=ansible | ok: [pihole]
+2025-07-02 16:53:14,626 p=9999 u=djdees n=ansible | TASK [network-config : Start and enable systemd-resolved (if present)] **********************************************************
+2025-07-02 16:53:14,664 p=9999 u=djdees n=ansible | skipping: [pihole]
+2025-07-02 16:53:14,680 p=9999 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf symlink if it exists] ************************************************************
+2025-07-02 16:53:14,721 p=9999 u=djdees n=ansible | skipping: [pihole]
+2025-07-02 16:53:14,734 p=9999 u=djdees n=ansible | TASK [network-config : Configure /etc/resolv.conf] ******************************************************************************
+2025-07-02 16:53:17,163 p=9999 u=djdees n=ansible | ok: [pihole]
+2025-07-02 16:53:17,190 p=9999 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-02 16:54:48,567 p=9999 u=djdees n=ansible | changed: [pihole]
+2025-07-02 16:54:48,579 p=9999 u=djdees n=ansible | TASK [unbound : Deploy Unbound config] ******************************************************************************************
+2025-07-02 16:54:56,776 p=9999 u=djdees n=ansible | changed: [pihole]
+2025-07-02 16:54:56,789 p=9999 u=djdees n=ansible | TASK [unbound : Enable Unbound service] *****************************************************************************************
+2025-07-02 16:55:01,477 p=9999 u=djdees n=ansible | ok: [pihole]
+2025-07-02 16:55:01,491 p=9999 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-02 16:55:03,882 p=9999 u=djdees n=ansible | changed: [pihole]
+2025-07-02 16:55:03,899 p=9999 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-02 16:55:06,887 p=9999 u=djdees n=ansible | changed: [pihole]
+2025-07-02 16:55:06,900 p=9999 u=djdees n=ansible | RUNNING HANDLER [unbound : restart unbound] *************************************************************************************
+2025-07-02 16:55:10,825 p=9999 u=djdees n=ansible | fatal: [pihole]: FAILED! => {"changed": false, "msg": "Unable to start service unbound: Job for unbound.service failed because the control process exited with error code.\nSee \"systemctl status unbound.service\" and \"journalctl -xeu unbound.service\" for details.\n"}
+2025-07-02 16:55:10,827 p=9999 u=djdees n=ansible | NO MORE HOSTS LEFT **************************************************************************************************************
+2025-07-02 16:55:10,828 p=9999 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-02 16:55:10,829 p=9999 u=djdees n=ansible | pihole                     : ok=10   changed=4    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-07-02 21:05:11,405 p=10374 u=djdees n=ansible | PLAY [Install and configure Unbound local DNS resolver] *************************************************************************
+2025-07-02 21:05:11,423 p=10374 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-02 21:05:16,648 p=10374 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:05:16,684 p=10374 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-02 21:05:19,628 p=10374 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:05:19,637 p=10374 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-02 21:05:23,608 p=10374 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:05:23,618 p=10374 u=djdees n=ansible | TASK [network-config : Gather service facts] ************************************************************************************
+2025-07-02 21:05:38,975 p=10374 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:05:38,987 p=10374 u=djdees n=ansible | TASK [network-config : Start and enable systemd-resolved (if present)] **********************************************************
+2025-07-02 21:05:39,033 p=10374 u=djdees n=ansible | skipping: [pihole]
+2025-07-02 21:05:39,052 p=10374 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf symlink if it exists] ************************************************************
+2025-07-02 21:05:39,097 p=10374 u=djdees n=ansible | skipping: [pihole]
+2025-07-02 21:05:39,111 p=10374 u=djdees n=ansible | TASK [network-config : Configure /etc/resolv.conf] ******************************************************************************
+2025-07-02 21:05:41,502 p=10374 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:05:41,514 p=10374 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-02 21:05:54,773 p=10374 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:05:54,793 p=10374 u=djdees n=ansible | TASK [unbound : Deploy Unbound config] ******************************************************************************************
+2025-07-02 21:05:57,694 p=10374 u=djdees n=ansible | changed: [pihole]
+2025-07-02 21:05:57,723 p=10374 u=djdees n=ansible | TASK [unbound : Enable Unbound service] *****************************************************************************************
+2025-07-02 21:06:03,198 p=10374 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:06:03,216 p=10374 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-02 21:06:05,724 p=10374 u=djdees n=ansible | changed: [pihole]
+2025-07-02 21:06:05,741 p=10374 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-02 21:06:08,514 p=10374 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:06:08,530 p=10374 u=djdees n=ansible | RUNNING HANDLER [unbound : restart unbound] *************************************************************************************
+2025-07-02 21:06:12,382 p=10374 u=djdees n=ansible | fatal: [pihole]: FAILED! => {"changed": false, "msg": "Unable to start service unbound: Job for unbound.service failed because the control process exited with error code.\nSee \"systemctl status unbound.service\" and \"journalctl -xeu unbound.service\" for details.\n"}
+2025-07-02 21:06:12,383 p=10374 u=djdees n=ansible | NO MORE HOSTS LEFT **************************************************************************************************************
+2025-07-02 21:06:12,385 p=10374 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-02 21:06:12,385 p=10374 u=djdees n=ansible | pihole                     : ok=10   changed=2    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-07-02 21:12:27,703 p=10499 u=djdees n=ansible | PLAY [Install and configure Unbound local DNS resolver] *************************************************************************
+2025-07-02 21:12:27,731 p=10499 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-02 21:12:32,837 p=10499 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:12:32,855 p=10499 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-02 21:12:35,520 p=10499 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:12:35,529 p=10499 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-02 21:12:39,461 p=10499 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:12:39,470 p=10499 u=djdees n=ansible | TASK [network-config : Gather service facts] ************************************************************************************
+2025-07-02 21:12:52,797 p=10499 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:12:52,814 p=10499 u=djdees n=ansible | TASK [network-config : Start and enable systemd-resolved (if present)] **********************************************************
+2025-07-02 21:12:52,873 p=10499 u=djdees n=ansible | skipping: [pihole]
+2025-07-02 21:12:52,894 p=10499 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf symlink if it exists] ************************************************************
+2025-07-02 21:12:52,940 p=10499 u=djdees n=ansible | skipping: [pihole]
+2025-07-02 21:12:52,972 p=10499 u=djdees n=ansible | TASK [network-config : Configure /etc/resolv.conf] ******************************************************************************
+2025-07-02 21:12:55,451 p=10499 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:12:55,518 p=10499 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-02 21:13:01,979 p=10499 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:13:01,992 p=10499 u=djdees n=ansible | TASK [unbound : Deploy Unbound config] ******************************************************************************************
+2025-07-02 21:13:04,446 p=10499 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:13:04,460 p=10499 u=djdees n=ansible | TASK [unbound : Enable Unbound service] *****************************************************************************************
+2025-07-02 21:13:09,125 p=10499 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:13:09,138 p=10499 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-02 21:13:11,774 p=10499 u=djdees n=ansible | changed: [pihole]
+2025-07-02 21:13:11,786 p=10499 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-02 21:13:14,506 p=10499 u=djdees n=ansible | ok: [pihole]
+2025-07-02 21:13:14,519 p=10499 u=djdees n=ansible | RUNNING HANDLER [unbound : restart unbound] *************************************************************************************
+2025-07-02 21:13:20,173 p=10499 u=djdees n=ansible | fatal: [pihole]: FAILED! => {"changed": false, "msg": "Unable to start service unbound: Job for unbound.service failed because the control process exited with error code.\nSee \"systemctl status unbound.service\" and \"journalctl -xeu unbound.service\" for details.\n"}
+2025-07-02 21:13:20,174 p=10499 u=djdees n=ansible | NO MORE HOSTS LEFT **************************************************************************************************************
+2025-07-02 21:13:20,175 p=10499 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-02 21:13:20,175 p=10499 u=djdees n=ansible | pihole                     : ok=10   changed=1    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-07-03 14:04:40,963 p=2992 u=djdees n=ansible | ERROR! the playbook: unbound_setup.yml could not be found
+2025-07-03 14:04:51,534 p=2995 u=djdees n=ansible | [WARNING]: Unable to parse /home/djdees/ansible/inventory/hosts as an inventory
+source
+
+2025-07-03 14:04:51,535 p=2995 u=djdees n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2025-07-03 14:04:51,558 p=2995 u=djdees n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that
+the implicit localhost does not match 'all'
+
+2025-07-03 14:04:51,559 p=2995 u=djdees n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: pihole
+
+2025-07-03 14:04:52,068 p=2995 u=djdees n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: piholes
+
+2025-07-03 14:04:52,068 p=2995 u=djdees n=ansible | PLAY [Install and configure Unbound local DNS resolver] ************************
+2025-07-03 14:04:52,068 p=2995 u=djdees n=ansible | skipping: no hosts matched
+2025-07-03 14:04:52,068 p=2995 u=djdees n=ansible | PLAY RECAP *********************************************************************
+2025-07-03 14:05:02,870 p=2997 u=djdees n=ansible | PLAY [Install and configure Unbound local DNS resolver] ************************
+2025-07-03 14:05:02,919 p=2997 u=djdees n=ansible | TASK [Gathering Facts] *********************************************************
+2025-07-03 14:05:11,887 p=2997 u=djdees n=ansible | ok: [pihole]
+2025-07-03 14:05:11,902 p=2997 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] **************
+2025-07-03 14:05:16,408 p=2997 u=djdees n=ansible | ok: [pihole]
+2025-07-03 14:05:16,416 p=2997 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] **********************
+2025-07-03 14:05:20,289 p=2997 u=djdees n=ansible | ok: [pihole]
+2025-07-03 14:05:20,297 p=2997 u=djdees n=ansible | TASK [network-config : Gather service facts] ***********************************
+2025-07-03 14:05:33,720 p=2997 u=djdees n=ansible | ok: [pihole]
+2025-07-03 14:05:33,730 p=2997 u=djdees n=ansible | TASK [network-config : Start and enable systemd-resolved (if present)] *********
+2025-07-03 14:05:33,756 p=2997 u=djdees n=ansible | skipping: [pihole]
+2025-07-03 14:05:33,767 p=2997 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf symlink if it exists] ***********
+2025-07-03 14:05:33,795 p=2997 u=djdees n=ansible | skipping: [pihole]
+2025-07-03 14:05:33,805 p=2997 u=djdees n=ansible | TASK [network-config : Configure /etc/resolv.conf] *****************************
+2025-07-03 14:05:36,179 p=2997 u=djdees n=ansible | ok: [pihole]
+2025-07-03 14:05:36,189 p=2997 u=djdees n=ansible | TASK [unbound : Install Unbound] ***********************************************
+2025-07-03 14:05:42,978 p=2997 u=djdees n=ansible | ok: [pihole]
+2025-07-03 14:05:42,987 p=2997 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] ************************************
+2025-07-03 14:05:47,564 p=2997 u=djdees n=ansible | changed: [pihole]
+2025-07-03 14:05:47,573 p=2997 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] ****************************************
+2025-07-03 14:05:49,957 p=2997 u=djdees n=ansible | ok: [pihole]
+2025-07-03 14:05:49,967 p=2997 u=djdees n=ansible | TASK [unbound : Deploy local zone records] *************************************
+2025-07-03 14:05:52,347 p=2997 u=djdees n=ansible | ok: [pihole]
+2025-07-03 14:05:52,357 p=2997 u=djdees n=ansible | TASK [unbound : Download root hints file] **************************************
+2025-07-03 14:05:58,483 p=2997 u=djdees n=ansible | ok: [pihole]
+2025-07-03 14:05:58,503 p=2997 u=djdees n=ansible | PLAY RECAP *********************************************************************
+2025-07-03 14:05:58,503 p=2997 u=djdees n=ansible | pihole                     : ok=10   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+2025-07-05 13:52:10,536 p=3243 u=djdees n=ansible | PLAY [Install and configure Unbound local DNS resolver] ********************************************
+2025-07-05 13:52:10,599 p=3243 u=djdees n=ansible | TASK [Gathering Facts] *****************************************************************************
+2025-07-05 13:52:15,665 p=3243 u=djdees n=ansible | ok: [pihole]
+2025-07-05 13:52:15,681 p=3243 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] **********************************
+2025-07-05 13:52:20,530 p=3243 u=djdees n=ansible | ok: [pihole]
+2025-07-05 13:52:20,538 p=3243 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ******************************************
+2025-07-05 13:52:24,424 p=3243 u=djdees n=ansible | ok: [pihole]
+2025-07-05 13:52:24,432 p=3243 u=djdees n=ansible | TASK [network-config : Gather service facts] *******************************************************
+2025-07-05 13:52:40,927 p=3243 u=djdees n=ansible | ok: [pihole]
+2025-07-05 13:52:40,938 p=3243 u=djdees n=ansible | TASK [network-config : Start and enable systemd-resolved (if present)] *****************************
+2025-07-05 13:52:40,971 p=3243 u=djdees n=ansible | skipping: [pihole]
+2025-07-05 13:52:40,984 p=3243 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf symlink if it exists] *******************************
+2025-07-05 13:52:41,029 p=3243 u=djdees n=ansible | skipping: [pihole]
+2025-07-05 13:52:41,043 p=3243 u=djdees n=ansible | TASK [network-config : Configure /etc/resolv.conf] *************************************************
+2025-07-05 13:52:43,451 p=3243 u=djdees n=ansible | ok: [pihole]
+2025-07-05 13:52:43,462 p=3243 u=djdees n=ansible | TASK [unbound : Install Unbound] *******************************************************************
+2025-07-05 13:52:49,794 p=3243 u=djdees n=ansible | ok: [pihole]
+2025-07-05 13:52:49,805 p=3243 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] ********************************************************
+2025-07-05 13:52:52,198 p=3243 u=djdees n=ansible | ok: [pihole]
+2025-07-05 13:52:52,209 p=3243 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] ************************************************************
+2025-07-05 13:52:54,593 p=3243 u=djdees n=ansible | ok: [pihole]
+2025-07-05 13:52:54,604 p=3243 u=djdees n=ansible | TASK [unbound : Deploy local zone records] *********************************************************
+2025-07-05 13:52:56,996 p=3243 u=djdees n=ansible | ok: [pihole]
+2025-07-05 13:52:57,007 p=3243 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] *************************************
+2025-07-05 13:52:58,276 p=3243 u=djdees n=ansible | changed: [pihole]
+2025-07-05 13:52:58,290 p=3243 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] ********************************************
+2025-07-05 13:53:00,801 p=3243 u=djdees n=ansible | changed: [pihole]
+2025-07-05 13:53:00,813 p=3243 u=djdees n=ansible | TASK [unbound : Download root hints file] **********************************************************
+2025-07-05 13:53:03,561 p=3243 u=djdees n=ansible | ok: [pihole]
+2025-07-05 13:53:03,572 p=3243 u=djdees n=ansible | RUNNING HANDLER [unbound : daemon-reexec] **********************************************************
+2025-07-05 13:53:05,993 p=3243 u=djdees n=ansible | changed: [pihole]
+2025-07-05 13:53:06,039 p=3243 u=djdees n=ansible | PLAY RECAP *****************************************************************************************
+2025-07-05 13:53:06,040 p=3243 u=djdees n=ansible | pihole                     : ok=13   changed=3    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+2025-07-05 15:20:47,921 p=3446 u=djdees n=ansible | PLAY [Install and configure Unbound local DNS resolver] ********************************************
+2025-07-05 15:20:47,940 p=3446 u=djdees n=ansible | TASK [Gathering Facts] *****************************************************************************
+2025-07-05 15:20:55,728 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:20:55,749 p=3446 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] **********************************
+2025-07-05 15:20:58,352 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:20:58,361 p=3446 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ******************************************
+2025-07-05 15:21:02,238 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:21:02,246 p=3446 u=djdees n=ansible | TASK [network-config : Gather service facts] *******************************************************
+2025-07-05 15:21:15,378 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:21:15,389 p=3446 u=djdees n=ansible | TASK [network-config : Start and enable systemd-resolved (if present)] *****************************
+2025-07-05 15:21:15,421 p=3446 u=djdees n=ansible | skipping: [pihole]
+2025-07-05 15:21:15,434 p=3446 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf symlink if it exists] *******************************
+2025-07-05 15:21:15,467 p=3446 u=djdees n=ansible | skipping: [pihole]
+2025-07-05 15:21:15,481 p=3446 u=djdees n=ansible | TASK [network-config : Configure /etc/resolv.conf] *************************************************
+2025-07-05 15:21:17,866 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:21:17,877 p=3446 u=djdees n=ansible | TASK [unbound : Install Unbound] *******************************************************************
+2025-07-05 15:21:24,165 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:21:24,177 p=3446 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] ********************************************************
+2025-07-05 15:21:26,756 p=3446 u=djdees n=ansible | changed: [pihole]
+2025-07-05 15:21:26,768 p=3446 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] ************************************************************
+2025-07-05 15:21:29,166 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:21:29,177 p=3446 u=djdees n=ansible | TASK [unbound : Deploy local zone records] *********************************************************
+2025-07-05 15:21:31,566 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:21:31,577 p=3446 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] *************************************
+2025-07-05 15:21:32,847 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:21:32,858 p=3446 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] ********************************************
+2025-07-05 15:21:35,226 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:21:35,237 p=3446 u=djdees n=ansible | TASK [unbound : Download root hints file] **********************************************************
+2025-07-05 15:21:37,957 p=3446 u=djdees n=ansible | ok: [pihole]
+2025-07-05 15:21:37,986 p=3446 u=djdees n=ansible | PLAY RECAP *****************************************************************************************
+2025-07-05 15:21:37,986 p=3446 u=djdees n=ansible | pihole                     : ok=12   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   

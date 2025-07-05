@@ -1,0 +1,14 @@
+- name: Validate Unbound configuration
+  command: unbound-checkconf
+  register: unbound_conf_check
+  failed_when: unbound_conf_check.rc != 0
+  changed_when: false
+  become: true
+
+- name: Show Unbound config check result
+  debug:
+    var: unbound_conf_check.stdout_lines
+
+- name: Notify Unbound restart on config validation pass
+  meta: flush_handlers
+  when: unbound_conf_check.rc == 0

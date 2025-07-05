@@ -1,0 +1,20 @@
+- name: Create systemd override directory for unbound
+  file:
+    path: /etc/systemd/system/unbound.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Install Unbound systemd limit override
+  copy:
+    dest: /etc/systemd/system/unbound.service.d/limits.conf
+    content: |
+      [Service]
+      LimitNOFILE=524288
+    owner: root
+    group: root
+    mode: '0644'
+  notify: daemon-reexec
+  become: true

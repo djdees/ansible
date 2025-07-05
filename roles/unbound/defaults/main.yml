@@ -1,9 +1,9 @@
 unbound_port: 5335
-do_ip4: yes
-do_ip6: no
-prefer_ip6: no
-do_udp: yes
-do_tcp: yes
+do_ip4: "yes"
+do_ip6: "no"
+prefer_ip6: "no"
+do_udp: "yes"
+do_tcp: "yes"
 num_threads: 1
 so_rcvbuf: 1m
 root_hints_url: https://www.internic.net/domain/named.root

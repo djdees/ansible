@@ -4,3 +4,7 @@
     state: restarted
     enabled: yes
   become: yes
+
+- name: daemon-reexec
+  ansible.builtin.command: systemctl daemon-reexec
+  become: yes

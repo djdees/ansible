@@ -16,4 +16,4 @@ galaxy_info:
         - focal
 
 dependencies:
-  - role: base_network
+  - role: network-config

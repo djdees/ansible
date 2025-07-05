@@ -1,14 +1,17 @@
-- name: Deploy Unbound config
+- name: Deploy Unbound main config
   template:
     src: unbound.conf.j2
-    dest: /etc/unbound/unbound.conf.d/unbound.conf
+    dest: /etc/unbound/unbound.conf
+    owner: root
+    group: root
     mode: '0644'
-  notify: restart unbound
-  become: yes
+  become: true
 
-- name: Enable Unbound service
-  systemd:
-    name: unbound
-    enabled: yes
-    daemon_reload: yes
-  become: yes
+- name: Deploy home LAN config
+  template:
+    src: home_lan.conf.j2
+    dest: /etc/unbound/unbound.conf.d/home_lan.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
