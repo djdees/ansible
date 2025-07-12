@@ -1,5 +1,6 @@
 - import_tasks: install.yml
 - import_tasks: config.yml
 - import_tasks: internal-dns.yml
+- import_tasks: systemd-resolved.yml
 - import_tasks: systemd-override.yml
 - import_tasks: root-hints.yml

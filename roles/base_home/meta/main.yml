@@ -15,4 +15,5 @@ galaxy_info:
         - jammy
         - focal
 
-dependencies: []
+dependencies:
+  - role: network-config

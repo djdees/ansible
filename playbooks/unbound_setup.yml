@@ -1,7 +1,12 @@
 ---
 - name: Install and configure Unbound local DNS resolver
-  hosts: piholes  # or all_network_hosts or whatever host/group you target
+  hosts: piholes
   become: true
+
+  pre_tasks:
+    - name: Gather system service facts
+      service_facts:
+      become: true
 
   roles:
     - unbound

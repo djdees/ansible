@@ -1,0 +1,6 @@
+# Managed by Ansible — persistent config for systemd-resolved
+[Resolve]
+DNS={% for dns in dns_servers %} {{ dns }}{% endfor %}
+Domains=~home.arpa
+DNSSEC=yes
+Cache=yes

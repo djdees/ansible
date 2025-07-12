@@ -3,8 +3,16 @@
     name: unbound
     state: restarted
     enabled: yes
-  become: yes
+  become: true
 
 - name: daemon-reexec
   ansible.builtin.command: systemctl daemon-reexec
-  become: yes
+  become: true
+
+- name: Restart systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: restarted
+  become: true
+  when: "'systemd-resolved.service' in ansible_facts.services"
+

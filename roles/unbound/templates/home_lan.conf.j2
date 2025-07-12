@@ -2,5 +2,5 @@ server:
   local-zone: "{{ unbound_local_zone }}" static
   {% for host, ip in unbound_ipv4_addresses.items() %}
   local-data: "{{ host }}.{{ unbound_local_zone }} IN A {{ ip }}"
-  local-data-ptr: "{{ ip }} {{ host }}.{{ unbound_local_zone }}"
+  local-data: "{{ ip.split('.')[3] }}.{{ ip.split('.')[2] }}.{{ ip.split('.')[1] }}.{{ ip.split('.')[0] }}.in-addr.arpa. IN PTR {{ host }}.{{ unbound_local_zone }}"
   {% endfor %}
