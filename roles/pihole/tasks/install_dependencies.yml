@@ -1,0 +1,10 @@
+- name: Install dependencies
+  apt:
+    name:
+      - curl
+      - sudo
+      - git
+      - dnsutils
+      - lsb-release
+    state: present
+  become: true

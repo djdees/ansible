@@ -1,0 +1,6 @@
+- name: Ensure Pi-hole FTL service is started and enabled
+  systemd:
+    name: pihole-FTL
+    state: started
+    enabled: yes
+  become: true

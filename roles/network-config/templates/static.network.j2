@@ -1,5 +1,6 @@
 [Match]
-Name=eth0
+Name={{ interface_name | default('eth0') }}
+
 
 [Network]
 Address={{ static_ip }}/24

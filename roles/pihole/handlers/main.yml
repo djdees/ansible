@@ -1,7 +1,9 @@
----
+- name: daemon-reexec
+  command: systemctl daemon-reexec
+  become: true
+
 - name: restart pihole-FTL
   systemd:
     name: pihole-FTL
     state: restarted
-    enabled: yes
   become: true

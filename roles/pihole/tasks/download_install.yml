@@ -1,0 +1,15 @@
+- name: Download Pi-hole install script
+  get_url:
+    url: https://install.pi-hole.net
+    dest: /tmp/pihole_install.sh
+    mode: '0755'
+  become: true
+
+- name: Run Pi-hole install script unattended
+  command: bash /tmp/pihole_install.sh --unattended
+  environment:
+    PIHOLE_WEBPASSWORD: "{{ pihole_admin_password }}"
+    PIHOLE_DNS_: "{{ dns_servers | join(',') }}"
+  args:
+    creates: /etc/pihole/setupVars.conf
+  become: true

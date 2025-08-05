@@ -1,0 +1,13 @@
+- name: Set random Pi-hole admin password if not already defined
+  set_fact:
+    pihole_admin_password: "{{ lookup('password', '/dev/null length=20 chars=ascii_letters,digits') }}"
+  when: pihole_admin_password is not defined
+
+- name: Show generated Pi-hole admin password
+  debug:
+    msg: "Pi-hole admin password for {{ inventory_hostname }} is: {{ pihole_admin_password }}"
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: true

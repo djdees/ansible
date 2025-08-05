@@ -1,0 +1,763 @@
+2025-07-13 11:56:05,516 p=10613 u=djdees n=ansible | [WARNING]: Unable to parse /home/djdees/ansible/inventory/inventory.yml.yml as an inventory source
+
+2025-07-13 11:56:05,517 p=10613 u=djdees n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2025-07-13 11:56:05,526 p=10613 u=djdees n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match
+'all'
+
+2025-07-13 11:56:05,526 p=10613 u=djdees n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: pihole
+
+2025-07-13 11:56:06,050 p=10613 u=djdees n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: piholes
+
+2025-07-13 11:56:06,051 p=10613 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *******************************************************************************************
+2025-07-13 11:56:06,051 p=10613 u=djdees n=ansible | skipping: no hosts matched
+2025-07-13 11:56:06,051 p=10613 u=djdees n=ansible | PLAY RECAP ****************************************************************************************************************
+2025-07-13 12:00:23,230 p=10635 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *******************************************************************************************
+2025-07-13 12:00:23,278 p=10635 u=djdees n=ansible | TASK [Gathering Facts] ****************************************************************************************************
+2025-07-13 12:00:30,320 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:00:30,340 p=10635 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] *********************************************************
+2025-07-13 12:00:33,409 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:00:33,421 p=10635 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] *****************************************************************
+2025-07-13 12:00:37,391 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:00:37,400 p=10635 u=djdees n=ansible | TASK [network-config : Gather service facts] ******************************************************************************
+2025-07-13 12:00:51,048 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:00:51,061 p=10635 u=djdees n=ansible | TASK [network-config : Start and enable systemd-resolved (if present)] ****************************************************
+2025-07-13 12:00:51,105 p=10635 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 12:00:51,122 p=10635 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf symlink if it exists] ******************************************************
+2025-07-13 12:00:51,172 p=10635 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 12:00:51,186 p=10635 u=djdees n=ansible | TASK [network-config : Configure /etc/resolv.conf] ************************************************************************
+2025-07-13 12:00:53,822 p=10635 u=djdees n=ansible | changed: [pihole]
+2025-07-13 12:00:53,836 p=10635 u=djdees n=ansible | TASK [unbound : Install Unbound] ******************************************************************************************
+2025-07-13 12:01:17,363 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:01:17,375 p=10635 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] *******************************************************************************
+2025-07-13 12:01:19,881 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:01:19,895 p=10635 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] ***********************************************************************************
+2025-07-13 12:01:22,346 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:01:22,358 p=10635 u=djdees n=ansible | TASK [unbound : Deploy local zone records] ********************************************************************************
+2025-07-13 12:01:24,759 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:01:24,773 p=10635 u=djdees n=ansible | TASK [unbound : Ensure /etc/systemd/resolved.conf.d exists] ***************************************************************
+2025-07-13 12:01:26,156 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:01:26,168 p=10635 u=djdees n=ansible | TASK [unbound : Deploy systemd-resolved DNS config override] **************************************************************
+2025-07-13 12:01:28,555 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:01:28,573 p=10635 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] ************************************************************
+2025-07-13 12:01:29,740 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:01:29,751 p=10635 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] *******************************************************************
+2025-07-13 12:01:32,141 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:01:32,154 p=10635 u=djdees n=ansible | TASK [unbound : Download root hints file] *********************************************************************************
+2025-07-13 12:01:40,087 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:01:40,102 p=10635 u=djdees n=ansible | TASK [pihole : Set random Pi-hole admin password if not already defined] **************************************************
+2025-07-13 12:01:40,141 p=10635 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 12:01:40,158 p=10635 u=djdees n=ansible | TASK [pihole : Show generated Pi-hole admin password] *********************************************************************
+2025-07-13 12:01:40,198 p=10635 u=djdees n=ansible | ok: [pihole] => {
+    "msg": "Pi-hole admin password for pihole is: changeme"
+}
+2025-07-13 12:01:40,210 p=10635 u=djdees n=ansible | TASK [pihole : Update apt cache] ******************************************************************************************
+2025-07-13 12:03:05,960 p=10635 u=djdees n=ansible | changed: [pihole]
+2025-07-13 12:03:05,971 p=10635 u=djdees n=ansible | TASK [pihole : Install dependencies] **************************************************************************************
+2025-07-13 12:03:13,037 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:03:13,050 p=10635 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] ***************************************************************************
+2025-07-13 12:03:25,908 p=10635 u=djdees n=ansible | changed: [pihole]
+2025-07-13 12:03:25,921 p=10635 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] *********************************************************************
+2025-07-13 12:03:27,159 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:03:27,171 p=10635 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf] **************************************************************************
+2025-07-13 12:03:31,365 p=10635 u=djdees n=ansible | changed: [pihole]
+2025-07-13 12:03:31,381 p=10635 u=djdees n=ansible | TASK [pihole : Create systemd override directory for pihole-FTL] **********************************************************
+2025-07-13 12:03:32,529 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:03:32,543 p=10635 u=djdees n=ansible | TASK [pihole : Deploy systemd override file for pihole-FTL to wait on unbound] ********************************************
+2025-07-13 12:03:35,099 p=10635 u=djdees n=ansible | changed: [pihole]
+2025-07-13 12:03:35,116 p=10635 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] *********************************************************
+2025-07-13 12:03:50,771 p=10635 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:03:50,784 p=10635 u=djdees n=ansible | RUNNING HANDLER [pihole : daemon-reexec] **********************************************************************************
+2025-07-13 12:03:53,474 p=10635 u=djdees n=ansible | changed: [pihole]
+2025-07-13 12:03:53,475 p=10635 u=djdees n=ansible | RUNNING HANDLER [pihole : restart pihole-FTL] *****************************************************************************
+2025-07-13 12:04:04,813 p=10635 u=djdees n=ansible | changed: [pihole]
+2025-07-13 12:04:04,827 p=10635 u=djdees n=ansible | PLAY RECAP ****************************************************************************************************************
+2025-07-13 12:04:04,828 p=10635 u=djdees n=ansible | pihole                     : ok=25   changed=7    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+2025-07-13 12:15:10,599 p=10892 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *******************************************************************************************
+2025-07-13 12:15:10,629 p=10892 u=djdees n=ansible | TASK [Gathering Facts] ****************************************************************************************************
+2025-07-13 12:15:15,809 p=10892 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:15:15,828 p=10892 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] *********************************************************
+2025-07-13 12:15:18,483 p=10892 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:15:18,492 p=10892 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] *****************************************************************
+2025-07-13 12:15:22,384 p=10892 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:15:22,396 p=10892 u=djdees n=ansible | TASK [network-config : Check if systemd-resolved service exists] **********************************************************
+2025-07-13 12:15:36,042 p=10892 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:15:36,057 p=10892 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] ****************************************************
+2025-07-13 12:15:36,094 p=10892 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 12:15:36,107 p=10892 u=djdees n=ansible | TASK [network-config : Configure systemd-resolved to use Pi-hole DNS first] ***********************************************
+2025-07-13 12:15:36,156 p=10892 u=djdees n=ansible | skipping: [pihole] => (item={'option': 'DNS', 'value': '192.168.1.8 1.1.1.1'}) 
+2025-07-13 12:15:36,164 p=10892 u=djdees n=ansible | skipping: [pihole] => (item={'option': 'FallbackDNS', 'value': '8.8.8.8'}) 
+2025-07-13 12:15:36,175 p=10892 u=djdees n=ansible | skipping: [pihole] => (item={'option': 'Domains', 'value': '~home.arpa'}) 
+2025-07-13 12:15:36,188 p=10892 u=djdees n=ansible | TASK [network-config : Ensure /etc/resolv.conf is symlink to systemd stub resolver] ***************************************
+2025-07-13 12:15:37,516 p=10892 u=djdees n=ansible | fatal: [pihole]: FAILED! => {"changed": false, "gid": 0, "group": "root", "mode": "0644", "msg": "src file does not exist, use \"force=yes\" if you really want to create the link: /run/systemd/resolve/stub-resolv.conf", "owner": "root", "path": "/etc/resolv.conf", "size": 61, "src": "/run/systemd/resolve/stub-resolv.conf", "state": "file", "uid": 0}
+2025-07-13 12:15:37,517 p=10892 u=djdees n=ansible | PLAY RECAP ****************************************************************************************************************
+2025-07-13 12:15:37,517 p=10892 u=djdees n=ansible | pihole                     : ok=4    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-07-13 12:59:14,536 p=2447 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] **************************************************************************************************
+2025-07-13 12:59:14,582 p=2447 u=djdees n=ansible | TASK [Gathering Facts] ***********************************************************************************************************
+2025-07-13 12:59:19,624 p=2447 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:59:19,639 p=2447 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ****************************************************************
+2025-07-13 12:59:22,428 p=2447 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:59:22,435 p=2447 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ************************************************************************
+2025-07-13 12:59:26,266 p=2447 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:59:26,272 p=2447 u=djdees n=ansible | TASK [network-config : Check if systemd-resolved service exists] *****************************************************************
+2025-07-13 12:59:39,293 p=2447 u=djdees n=ansible | ok: [pihole]
+2025-07-13 12:59:39,305 p=2447 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] ***********************************************************
+2025-07-13 12:59:39,335 p=2447 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 12:59:39,347 p=2447 u=djdees n=ansible | TASK [network-config : Configure systemd-resolved to use Pi-hole DNS first] ******************************************************
+2025-07-13 12:59:39,387 p=2447 u=djdees n=ansible | skipping: [pihole] => (item={'option': 'DNS', 'value': '192.168.1.8 1.1.1.1'}) 
+2025-07-13 12:59:39,393 p=2447 u=djdees n=ansible | skipping: [pihole] => (item={'option': 'FallbackDNS', 'value': '8.8.8.8'}) 
+2025-07-13 12:59:39,401 p=2447 u=djdees n=ansible | skipping: [pihole] => (item={'option': 'Domains', 'value': '~home.arpa'}) 
+2025-07-13 12:59:39,412 p=2447 u=djdees n=ansible | TASK [network-config : Ensure /etc/resolv.conf is symlink to systemd stub resolver] **********************************************
+2025-07-13 12:59:40,702 p=2447 u=djdees n=ansible | fatal: [pihole]: FAILED! => {"changed": false, "gid": 0, "group": "root", "mode": "0644", "msg": "src file does not exist, use \"force=yes\" if you really want to create the link: /run/systemd/resolve/stub-resolv.conf", "owner": "root", "path": "/etc/resolv.conf", "size": 61, "src": "/run/systemd/resolve/stub-resolv.conf", "state": "file", "uid": 0}
+2025-07-13 12:59:40,704 p=2447 u=djdees n=ansible | PLAY RECAP ***********************************************************************************************************************
+2025-07-13 12:59:40,705 p=2447 u=djdees n=ansible | pihole                     : ok=4    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-07-13 13:06:29,508 p=2727 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] **************************************************************************************************
+2025-07-13 13:06:29,528 p=2727 u=djdees n=ansible | TASK [Gathering Facts] ***********************************************************************************************************
+2025-07-13 13:06:34,477 p=2727 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:06:34,491 p=2727 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ****************************************************************
+2025-07-13 13:06:37,040 p=2727 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:06:37,047 p=2727 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ************************************************************************
+2025-07-13 13:06:40,826 p=2727 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:06:40,834 p=2727 u=djdees n=ansible | TASK [network-config : Check if systemd-resolved service exists] *****************************************************************
+2025-07-13 13:06:54,163 p=2727 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:06:54,174 p=2727 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] ***********************************************************
+2025-07-13 13:06:54,205 p=2727 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 13:06:54,216 p=2727 u=djdees n=ansible | TASK [network-config : Configure systemd-resolved to use Pi-hole DNS first] ******************************************************
+2025-07-13 13:06:54,255 p=2727 u=djdees n=ansible | skipping: [pihole] => (item={'option': 'DNS', 'value': '192.168.1.8 1.1.1.1'}) 
+2025-07-13 13:06:54,263 p=2727 u=djdees n=ansible | skipping: [pihole] => (item={'option': 'FallbackDNS', 'value': '8.8.8.8'}) 
+2025-07-13 13:06:54,269 p=2727 u=djdees n=ansible | skipping: [pihole] => (item={'option': 'Domains', 'value': '~home.arpa'}) 
+2025-07-13 13:06:54,282 p=2727 u=djdees n=ansible | TASK [network-config : Wait for systemd-resolved stub file to exist] *************************************************************
+2025-07-13 13:07:05,695 p=2727 u=djdees n=ansible | fatal: [pihole]: FAILED! => {"changed": false, "elapsed": 10, "msg": "Timeout when waiting for file /run/systemd/resolve/stub-resolv.conf"}
+2025-07-13 13:07:05,696 p=2727 u=djdees n=ansible | PLAY RECAP ***********************************************************************************************************************
+2025-07-13 13:07:05,696 p=2727 u=djdees n=ansible | pihole                     : ok=4    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-07-13 13:24:26,058 p=3493 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-13 13:24:26,079 p=3493 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-13 13:24:32,526 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:24:32,539 p=3493 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-13 13:24:35,318 p=3493 u=djdees n=ansible | changed: [pihole]
+2025-07-13 13:24:35,325 p=3493 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-13 13:24:42,323 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:24:42,332 p=3493 u=djdees n=ansible | TASK [network-config : Gather service facts to check for systemd-resolved] ******************************************************
+2025-07-13 13:25:03,748 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:03,758 p=3493 u=djdees n=ansible | TASK [network-config : Install systemd-resolved package if not installed (Debian/Ubuntu)] ***************************************
+2025-07-13 13:25:03,788 p=3493 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 13:25:03,799 p=3493 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] **********************************************************
+2025-07-13 13:25:07,398 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:07,408 p=3493 u=djdees n=ansible | TASK [network-config : Configure systemd-resolved to use Pi-hole DNS first] *****************************************************
+2025-07-13 13:25:08,731 p=3493 u=djdees n=ansible | changed: [pihole] => (item={'option': 'DNS', 'value': '192.168.1.8 1.1.1.1'})
+2025-07-13 13:25:09,815 p=3493 u=djdees n=ansible | changed: [pihole] => (item={'option': 'FallbackDNS', 'value': '8.8.8.8'})
+2025-07-13 13:25:10,903 p=3493 u=djdees n=ansible | changed: [pihole] => (item={'option': 'Domains', 'value': '~home.arpa'})
+2025-07-13 13:25:10,914 p=3493 u=djdees n=ansible | TASK [network-config : Check if /etc/resolv.conf exists and is a symlink] *******************************************************
+2025-07-13 13:25:12,140 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:12,149 p=3493 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf if it is a symlink but not the systemd stub resolver] ****************************
+2025-07-13 13:25:12,176 p=3493 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 13:25:12,187 p=3493 u=djdees n=ansible | TASK [network-config : Create symlink for /etc/resolv.conf to systemd stub resolver if missing or incorrect] ********************
+2025-07-13 13:25:12,214 p=3493 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 13:25:12,313 p=3493 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-13 13:25:28,522 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:28,532 p=3493 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] *************************************************************************************
+2025-07-13 13:25:31,059 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:31,069 p=3493 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] *****************************************************************************************
+2025-07-13 13:25:33,513 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:33,524 p=3493 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-13 13:25:35,933 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:35,943 p=3493 u=djdees n=ansible | TASK [unbound : Ensure /etc/systemd/resolved.conf.d exists] *********************************************************************
+2025-07-13 13:25:37,192 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:37,203 p=3493 u=djdees n=ansible | TASK [unbound : Deploy systemd-resolved DNS config override] ********************************************************************
+2025-07-13 13:25:39,621 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:39,631 p=3493 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] ******************************************************************
+2025-07-13 13:25:40,798 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:40,808 p=3493 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] *************************************************************************
+2025-07-13 13:25:43,186 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:43,196 p=3493 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-13 13:25:59,929 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:25:59,939 p=3493 u=djdees n=ansible | TASK [pihole : Set random Pi-hole admin password if not already defined] ********************************************************
+2025-07-13 13:25:59,968 p=3493 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 13:25:59,997 p=3493 u=djdees n=ansible | TASK [pihole : Show generated Pi-hole admin password] ***************************************************************************
+2025-07-13 13:26:00,025 p=3493 u=djdees n=ansible | ok: [pihole] => {
+    "msg": "Pi-hole admin password for pihole is: changeme"
+}
+2025-07-13 13:26:00,036 p=3493 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-13 13:26:09,480 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:26:09,490 p=3493 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-13 13:26:18,653 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:26:18,663 p=3493 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-13 13:26:22,265 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:26:22,278 p=3493 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-13 13:26:23,480 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:26:23,490 p=3493 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf] ********************************************************************************
+2025-07-13 13:26:25,872 p=3493 u=djdees n=ansible | changed: [pihole]
+2025-07-13 13:26:25,883 p=3493 u=djdees n=ansible | TASK [pihole : Create systemd override directory for pihole-FTL] ****************************************************************
+2025-07-13 13:26:27,023 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:26:27,033 p=3493 u=djdees n=ansible | TASK [pihole : Deploy systemd override file for pihole-FTL to wait on unbound] **************************************************
+2025-07-13 13:26:29,408 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:26:29,419 p=3493 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] ***************************************************************
+2025-07-13 13:26:33,005 p=3493 u=djdees n=ansible | ok: [pihole]
+2025-07-13 13:26:33,014 p=3493 u=djdees n=ansible | RUNNING HANDLER [network-config : Restart networking] ***************************************************************************
+2025-07-13 13:26:36,940 p=3493 u=djdees n=ansible | changed: [pihole]
+2025-07-13 13:26:36,940 p=3493 u=djdees n=ansible | RUNNING HANDLER [network-config : Conditionally reboot system] ******************************************************************
+2025-07-13 13:26:36,978 p=3493 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 13:26:36,979 p=3493 u=djdees n=ansible | RUNNING HANDLER [unbound : Restart systemd-resolved] ****************************************************************************
+2025-07-13 13:26:41,223 p=3493 u=djdees n=ansible | changed: [pihole]
+2025-07-13 13:26:41,223 p=3493 u=djdees n=ansible | RUNNING HANDLER [pihole : restart pihole-FTL] ***********************************************************************************
+2025-07-13 13:27:03,542 p=3493 u=djdees n=ansible | changed: [pihole]
+2025-07-13 13:27:03,553 p=3493 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-13 13:27:03,553 p=3493 u=djdees n=ansible | pihole                     : ok=28   changed=6    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
+2025-07-13 14:34:21,392 p=3866 u=djdees n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  did not find expected key
+
+The error appears to be in '/home/djdees/ansible/roles/network-config/tasks/resolved.yml': line 59, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+  - name: Deploy systemd-resolved configuration
+  ^ here
+
+2025-07-13 14:35:05,836 p=3878 u=djdees n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  did not find expected '-' indicator
+
+The error appears to be in '/home/djdees/ansible/roles/network-config/tasks/resolved.yml': line 60, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+- name: Deploy systemd-resolved configuration
+template:
+^ here
+
+2025-07-13 14:35:26,338 p=3888 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-13 14:35:26,358 p=3888 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-13 14:35:31,349 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:35:31,364 p=3888 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-13 14:35:33,966 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:35:33,976 p=3888 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-13 14:35:37,842 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:35:37,852 p=3888 u=djdees n=ansible | TASK [network-config : Gather service facts to check for systemd-resolved] ******************************************************
+2025-07-13 14:35:52,138 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:35:52,149 p=3888 u=djdees n=ansible | TASK [network-config : Install systemd-resolved package if not installed (Debian/Ubuntu)] ***************************************
+2025-07-13 14:35:52,182 p=3888 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 14:35:52,192 p=3888 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] **********************************************************
+2025-07-13 14:35:55,838 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:35:55,848 p=3888 u=djdees n=ansible | TASK [network-config : Configure systemd-resolved to use Pi-hole DNS first] *****************************************************
+2025-07-13 14:35:57,066 p=3888 u=djdees n=ansible | ok: [pihole] => (item={'option': 'DNS', 'value': '192.168.1.8 1.1.1.1'})
+2025-07-13 14:35:58,164 p=3888 u=djdees n=ansible | ok: [pihole] => (item={'option': 'FallbackDNS', 'value': '8.8.8.8'})
+2025-07-13 14:35:59,263 p=3888 u=djdees n=ansible | ok: [pihole] => (item={'option': 'Domains', 'value': '~home.arpa'})
+2025-07-13 14:35:59,273 p=3888 u=djdees n=ansible | TASK [network-config : Check if /etc/resolv.conf exists and is a symlink] *******************************************************
+2025-07-13 14:36:00,775 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:36:00,784 p=3888 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf if it is a symlink but not the systemd stub resolver] ****************************
+2025-07-13 14:36:00,810 p=3888 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 14:36:00,823 p=3888 u=djdees n=ansible | TASK [network-config : Create symlink for /etc/resolv.conf to systemd stub resolver if missing or incorrect] ********************
+2025-07-13 14:36:00,851 p=3888 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 14:36:00,862 p=3888 u=djdees n=ansible | TASK [network-config : Deploy systemd-resolved configuration] *******************************************************************
+2025-07-13 14:36:03,386 p=3888 u=djdees n=ansible | changed: [pihole]
+2025-07-13 14:36:03,397 p=3888 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-13 14:36:16,798 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:36:16,809 p=3888 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] *************************************************************************************
+2025-07-13 14:36:19,184 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:36:19,194 p=3888 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] *****************************************************************************************
+2025-07-13 14:36:21,585 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:36:21,596 p=3888 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-13 14:36:23,977 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:36:23,988 p=3888 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] ******************************************************************
+2025-07-13 14:36:25,236 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:36:25,247 p=3888 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] *************************************************************************
+2025-07-13 14:36:27,622 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:36:27,635 p=3888 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-13 14:36:35,830 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:36:35,845 p=3888 u=djdees n=ansible | TASK [pihole : Set random Pi-hole admin password if not already defined] ********************************************************
+2025-07-13 14:36:35,877 p=3888 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 14:36:35,889 p=3888 u=djdees n=ansible | TASK [pihole : Show generated Pi-hole admin password] ***************************************************************************
+2025-07-13 14:36:35,922 p=3888 u=djdees n=ansible | ok: [pihole] => {
+    "msg": "Pi-hole admin password for pihole is: changeme"
+}
+2025-07-13 14:36:35,937 p=3888 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-13 14:36:53,299 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:36:53,310 p=3888 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-13 14:36:59,462 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:36:59,473 p=3888 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-13 14:37:02,643 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:37:02,653 p=3888 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-13 14:37:03,870 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:37:03,880 p=3888 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf] ********************************************************************************
+2025-07-13 14:37:16,860 p=3888 u=djdees n=ansible | changed: [pihole]
+2025-07-13 14:37:16,870 p=3888 u=djdees n=ansible | TASK [pihole : Create systemd override directory for pihole-FTL] ****************************************************************
+2025-07-13 14:37:18,059 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:37:18,069 p=3888 u=djdees n=ansible | TASK [pihole : Deploy systemd override file for pihole-FTL to wait on unbound] **************************************************
+2025-07-13 14:37:20,488 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:37:20,499 p=3888 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] ***************************************************************
+2025-07-13 14:37:24,137 p=3888 u=djdees n=ansible | ok: [pihole]
+2025-07-13 14:37:24,147 p=3888 u=djdees n=ansible | RUNNING HANDLER [unbound : Restart systemd-resolved] ****************************************************************************
+2025-07-13 14:37:28,389 p=3888 u=djdees n=ansible | changed: [pihole]
+2025-07-13 14:37:28,389 p=3888 u=djdees n=ansible | RUNNING HANDLER [pihole : restart pihole-FTL] ***********************************************************************************
+2025-07-13 14:37:34,990 p=3888 u=djdees n=ansible | changed: [pihole]
+2025-07-13 14:37:35,001 p=3888 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-13 14:37:35,001 p=3888 u=djdees n=ansible | pihole                     : ok=26   changed=4    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2025-07-13 16:25:39,823 p=4237 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-13 16:25:39,849 p=4237 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-13 16:25:44,900 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:25:44,916 p=4237 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-13 16:25:47,511 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:25:47,517 p=4237 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-13 16:25:51,317 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:25:51,324 p=4237 u=djdees n=ansible | TASK [network-config : Gather service facts to check for systemd-resolved] ******************************************************
+2025-07-13 16:26:04,545 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:04,554 p=4237 u=djdees n=ansible | TASK [network-config : Install systemd-resolved package if not installed (Debian/Ubuntu)] ***************************************
+2025-07-13 16:26:04,580 p=4237 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 16:26:04,591 p=4237 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] **********************************************************
+2025-07-13 16:26:08,242 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:08,253 p=4237 u=djdees n=ansible | TASK [network-config : Deploy systemd-resolved configuration] *******************************************************************
+2025-07-13 16:26:10,775 p=4237 u=djdees n=ansible | changed: [pihole]
+2025-07-13 16:26:10,785 p=4237 u=djdees n=ansible | TASK [network-config : Wait for systemd-resolved stub file to exist] ************************************************************
+2025-07-13 16:26:12,121 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:12,131 p=4237 u=djdees n=ansible | TASK [network-config : Check if /etc/resolv.conf exists and is a symlink] *******************************************************
+2025-07-13 16:26:13,362 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:13,374 p=4237 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf if it is a symlink but not the systemd stub resolver] ****************************
+2025-07-13 16:26:14,657 p=4237 u=djdees n=ansible | changed: [pihole]
+2025-07-13 16:26:14,669 p=4237 u=djdees n=ansible | TASK [network-config : Create symlink for /etc/resolv.conf to systemd stub resolver if missing or incorrect] ********************
+2025-07-13 16:26:16,298 p=4237 u=djdees n=ansible | changed: [pihole]
+2025-07-13 16:26:16,308 p=4237 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-13 16:26:28,736 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:28,749 p=4237 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] *************************************************************************************
+2025-07-13 16:26:31,186 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:31,199 p=4237 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] *****************************************************************************************
+2025-07-13 16:26:33,635 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:33,648 p=4237 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-13 16:26:36,080 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:36,091 p=4237 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] ******************************************************************
+2025-07-13 16:26:37,236 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:37,247 p=4237 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] *************************************************************************
+2025-07-13 16:26:39,638 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:39,649 p=4237 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-13 16:26:47,741 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:26:47,752 p=4237 u=djdees n=ansible | TASK [pihole : Set random Pi-hole admin password if not already defined] ********************************************************
+2025-07-13 16:26:47,782 p=4237 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 16:26:47,793 p=4237 u=djdees n=ansible | TASK [pihole : Show generated Pi-hole admin password] ***************************************************************************
+2025-07-13 16:26:47,820 p=4237 u=djdees n=ansible | ok: [pihole] => {
+    "msg": "Pi-hole admin password for pihole is: changeme"
+}
+2025-07-13 16:26:47,832 p=4237 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-13 16:27:52,899 p=4237 u=djdees n=ansible | changed: [pihole]
+2025-07-13 16:27:52,911 p=4237 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-13 16:27:59,403 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:27:59,413 p=4237 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-13 16:28:02,565 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:28:02,576 p=4237 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-13 16:28:03,805 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:28:03,815 p=4237 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf] ********************************************************************************
+2025-07-13 16:28:06,197 p=4237 u=djdees n=ansible | changed: [pihole]
+2025-07-13 16:28:06,207 p=4237 u=djdees n=ansible | TASK [pihole : Create systemd override directory for pihole-FTL] ****************************************************************
+2025-07-13 16:28:07,357 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:28:07,367 p=4237 u=djdees n=ansible | TASK [pihole : Deploy systemd override file for pihole-FTL to wait on unbound] **************************************************
+2025-07-13 16:28:09,733 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:28:09,744 p=4237 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] ***************************************************************
+2025-07-13 16:28:13,471 p=4237 u=djdees n=ansible | ok: [pihole]
+2025-07-13 16:28:13,481 p=4237 u=djdees n=ansible | RUNNING HANDLER [unbound : Restart systemd-resolved] ****************************************************************************
+2025-07-13 16:28:17,691 p=4237 u=djdees n=ansible | changed: [pihole]
+2025-07-13 16:28:17,692 p=4237 u=djdees n=ansible | RUNNING HANDLER [pihole : restart pihole-FTL] ***********************************************************************************
+2025-07-13 16:28:41,616 p=4237 u=djdees n=ansible | changed: [pihole]
+2025-07-13 16:28:41,627 p=4237 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-13 16:28:41,627 p=4237 u=djdees n=ansible | pihole                     : ok=28   changed=7    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+2025-07-13 17:00:27,324 p=4405 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-13 17:00:27,346 p=4405 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-13 17:00:33,702 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:00:33,716 p=4405 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-13 17:00:36,282 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:00:36,290 p=4405 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-13 17:00:40,106 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:00:40,113 p=4405 u=djdees n=ansible | TASK [network-config : Gather service facts to check for systemd-resolved] ******************************************************
+2025-07-13 17:00:53,527 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:00:53,538 p=4405 u=djdees n=ansible | TASK [network-config : Install systemd-resolved package if not installed (Debian/Ubuntu)] ***************************************
+2025-07-13 17:00:53,567 p=4405 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 17:00:53,580 p=4405 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] **********************************************************
+2025-07-13 17:00:57,184 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:00:57,197 p=4405 u=djdees n=ansible | TASK [network-config : Deploy systemd-resolved configuration] *******************************************************************
+2025-07-13 17:00:59,754 p=4405 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:00:59,765 p=4405 u=djdees n=ansible | TASK [network-config : Wait for systemd-resolved stub file to exist] ************************************************************
+2025-07-13 17:01:01,119 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:01,131 p=4405 u=djdees n=ansible | TASK [network-config : Check if /etc/resolv.conf exists and is a symlink] *******************************************************
+2025-07-13 17:01:02,380 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:02,390 p=4405 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf if it is a symlink but not the systemd stub resolver] ****************************
+2025-07-13 17:01:03,667 p=4405 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:01:03,685 p=4405 u=djdees n=ansible | TASK [network-config : Create symlink for /etc/resolv.conf to systemd stub resolver if missing or incorrect] ********************
+2025-07-13 17:01:04,853 p=4405 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:01:04,865 p=4405 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-13 17:01:11,174 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:11,186 p=4405 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] *************************************************************************************
+2025-07-13 17:01:13,573 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:13,584 p=4405 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] *****************************************************************************************
+2025-07-13 17:01:15,978 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:15,989 p=4405 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-13 17:01:18,381 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:18,393 p=4405 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] ******************************************************************
+2025-07-13 17:01:19,537 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:19,549 p=4405 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] *************************************************************************
+2025-07-13 17:01:21,907 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:21,917 p=4405 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-13 17:01:39,054 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:39,064 p=4405 u=djdees n=ansible | TASK [pihole : Set random Pi-hole admin password if not already defined] ********************************************************
+2025-07-13 17:01:39,094 p=4405 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 17:01:39,105 p=4405 u=djdees n=ansible | TASK [pihole : Show generated Pi-hole admin password] ***************************************************************************
+2025-07-13 17:01:39,132 p=4405 u=djdees n=ansible | ok: [pihole] => {
+    "msg": "Pi-hole admin password for pihole is: changeme"
+}
+2025-07-13 17:01:39,143 p=4405 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-13 17:01:51,903 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:51,912 p=4405 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-13 17:01:58,179 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:01:58,189 p=4405 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-13 17:02:08,029 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:02:08,039 p=4405 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-13 17:02:09,234 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:02:09,245 p=4405 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf] ********************************************************************************
+2025-07-13 17:02:11,631 p=4405 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:02:11,641 p=4405 u=djdees n=ansible | TASK [pihole : Create systemd override directory for pihole-FTL] ****************************************************************
+2025-07-13 17:02:12,784 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:02:12,795 p=4405 u=djdees n=ansible | TASK [pihole : Deploy systemd override file for pihole-FTL to wait on unbound] **************************************************
+2025-07-13 17:02:15,168 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:02:15,178 p=4405 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] ***************************************************************
+2025-07-13 17:02:20,398 p=4405 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:02:20,410 p=4405 u=djdees n=ansible | RUNNING HANDLER [unbound : Restart systemd-resolved] ****************************************************************************
+2025-07-13 17:02:24,636 p=4405 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:02:24,636 p=4405 u=djdees n=ansible | RUNNING HANDLER [pihole : restart pihole-FTL] ***********************************************************************************
+2025-07-13 17:02:40,486 p=4405 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:02:40,496 p=4405 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-13 17:02:40,496 p=4405 u=djdees n=ansible | pihole                     : ok=28   changed=6    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+2025-07-13 17:04:08,587 p=4549 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-13 17:04:08,606 p=4549 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-13 17:04:13,599 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:04:13,615 p=4549 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-13 17:04:17,270 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:04:17,278 p=4549 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-13 17:04:21,107 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:04:21,115 p=4549 u=djdees n=ansible | TASK [network-config : Gather service facts to check for systemd-resolved] ******************************************************
+2025-07-13 17:04:35,335 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:04:35,346 p=4549 u=djdees n=ansible | TASK [network-config : Install systemd-resolved package if not installed (Debian/Ubuntu)] ***************************************
+2025-07-13 17:04:35,374 p=4549 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 17:04:35,385 p=4549 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] **********************************************************
+2025-07-13 17:04:39,024 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:04:39,036 p=4549 u=djdees n=ansible | TASK [network-config : Deploy systemd-resolved configuration] *******************************************************************
+2025-07-13 17:04:41,599 p=4549 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:04:41,609 p=4549 u=djdees n=ansible | TASK [network-config : Wait for systemd-resolved stub file to exist] ************************************************************
+2025-07-13 17:04:42,921 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:04:42,932 p=4549 u=djdees n=ansible | TASK [network-config : Check if /etc/resolv.conf exists and is a symlink] *******************************************************
+2025-07-13 17:04:44,150 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:04:44,162 p=4549 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf if it is a symlink but not the systemd stub resolver] ****************************
+2025-07-13 17:04:45,396 p=4549 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:04:45,407 p=4549 u=djdees n=ansible | TASK [network-config : Create symlink for /etc/resolv.conf to systemd stub resolver if missing or incorrect] ********************
+2025-07-13 17:04:46,566 p=4549 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:04:46,578 p=4549 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-13 17:04:52,883 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:04:52,895 p=4549 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] *************************************************************************************
+2025-07-13 17:04:55,301 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:04:55,311 p=4549 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] *****************************************************************************************
+2025-07-13 17:04:57,699 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:04:57,710 p=4549 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-13 17:05:00,094 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:00,104 p=4549 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] ******************************************************************
+2025-07-13 17:05:01,246 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:01,258 p=4549 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] *************************************************************************
+2025-07-13 17:05:03,623 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:03,634 p=4549 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-13 17:05:06,458 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:06,472 p=4549 u=djdees n=ansible | TASK [pihole : Set random Pi-hole admin password if not already defined] ********************************************************
+2025-07-13 17:05:06,498 p=4549 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 17:05:06,508 p=4549 u=djdees n=ansible | TASK [pihole : Show generated Pi-hole admin password] ***************************************************************************
+2025-07-13 17:05:06,576 p=4549 u=djdees n=ansible | ok: [pihole] => {
+    "msg": "Pi-hole admin password for pihole is: changeme"
+}
+2025-07-13 17:05:06,585 p=4549 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-13 17:05:22,048 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:22,059 p=4549 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-13 17:05:28,215 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:28,226 p=4549 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-13 17:05:31,553 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:31,565 p=4549 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-13 17:05:32,834 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:32,844 p=4549 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf] ********************************************************************************
+2025-07-13 17:05:35,231 p=4549 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:05:35,241 p=4549 u=djdees n=ansible | TASK [pihole : Create systemd override directory for pihole-FTL] ****************************************************************
+2025-07-13 17:05:36,383 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:36,394 p=4549 u=djdees n=ansible | TASK [pihole : Deploy systemd override file for pihole-FTL to wait on unbound] **************************************************
+2025-07-13 17:05:38,804 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:38,814 p=4549 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] ***************************************************************
+2025-07-13 17:05:42,390 p=4549 u=djdees n=ansible | ok: [pihole]
+2025-07-13 17:05:42,400 p=4549 u=djdees n=ansible | RUNNING HANDLER [unbound : Restart systemd-resolved] ****************************************************************************
+2025-07-13 17:05:46,575 p=4549 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:05:46,575 p=4549 u=djdees n=ansible | RUNNING HANDLER [pihole : restart pihole-FTL] ***********************************************************************************
+2025-07-13 17:06:03,759 p=4549 u=djdees n=ansible | changed: [pihole]
+2025-07-13 17:06:03,770 p=4549 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-13 17:06:03,771 p=4549 u=djdees n=ansible | pihole                     : ok=28   changed=6    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+2025-07-13 19:36:43,403 p=4826 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-13 19:36:43,422 p=4826 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-13 19:36:48,462 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:36:48,476 p=4826 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-13 19:36:52,099 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:36:52,106 p=4826 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-13 19:36:55,923 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:36:55,931 p=4826 u=djdees n=ansible | TASK [network-config : Gather service facts to check for systemd-resolved] ******************************************************
+2025-07-13 19:37:09,472 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:09,482 p=4826 u=djdees n=ansible | TASK [network-config : Install systemd-resolved package if not installed (Debian/Ubuntu)] ***************************************
+2025-07-13 19:37:09,509 p=4826 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 19:37:09,519 p=4826 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] **********************************************************
+2025-07-13 19:37:13,105 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:13,115 p=4826 u=djdees n=ansible | TASK [network-config : Deploy systemd-resolved configuration] *******************************************************************
+2025-07-13 19:37:15,646 p=4826 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:37:15,656 p=4826 u=djdees n=ansible | TASK [network-config : Wait for systemd-resolved stub file to exist] ************************************************************
+2025-07-13 19:37:16,966 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:16,977 p=4826 u=djdees n=ansible | TASK [network-config : Check if /etc/resolv.conf exists and is a symlink] *******************************************************
+2025-07-13 19:37:18,310 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:18,319 p=4826 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf if it is a symlink but not the systemd stub resolver] ****************************
+2025-07-13 19:37:19,548 p=4826 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:37:19,558 p=4826 u=djdees n=ansible | TASK [network-config : Create symlink for /etc/resolv.conf to systemd stub resolver if missing or incorrect] ********************
+2025-07-13 19:37:20,711 p=4826 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:37:20,722 p=4826 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-13 19:37:26,987 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:26,998 p=4826 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] *************************************************************************************
+2025-07-13 19:37:29,380 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:29,391 p=4826 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] *****************************************************************************************
+2025-07-13 19:37:31,848 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:31,858 p=4826 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-13 19:37:34,238 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:34,251 p=4826 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] ******************************************************************
+2025-07-13 19:37:35,420 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:35,434 p=4826 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] *************************************************************************
+2025-07-13 19:37:37,795 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:37,805 p=4826 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-13 19:37:45,830 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:37:45,840 p=4826 u=djdees n=ansible | TASK [pihole : Set random Pi-hole admin password if not already defined] ********************************************************
+2025-07-13 19:37:45,868 p=4826 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 19:37:45,879 p=4826 u=djdees n=ansible | TASK [pihole : Show generated Pi-hole admin password] ***************************************************************************
+2025-07-13 19:37:45,948 p=4826 u=djdees n=ansible | ok: [pihole] => {
+    "msg": "Pi-hole admin password for pihole is: changeme"
+}
+2025-07-13 19:37:45,957 p=4826 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-13 19:38:01,550 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:38:01,561 p=4826 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-13 19:38:07,716 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:38:07,728 p=4826 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-13 19:38:10,875 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:38:10,886 p=4826 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-13 19:38:12,083 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:38:12,094 p=4826 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf] ********************************************************************************
+2025-07-13 19:38:16,064 p=4826 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:38:16,074 p=4826 u=djdees n=ansible | TASK [pihole : Create systemd override directory for pihole-FTL] ****************************************************************
+2025-07-13 19:38:17,212 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:38:17,224 p=4826 u=djdees n=ansible | TASK [pihole : Deploy systemd override file for pihole-FTL to wait on unbound] **************************************************
+2025-07-13 19:38:19,617 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:38:19,628 p=4826 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] ***************************************************************
+2025-07-13 19:38:27,662 p=4826 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:38:27,673 p=4826 u=djdees n=ansible | RUNNING HANDLER [unbound : Restart systemd-resolved] ****************************************************************************
+2025-07-13 19:38:31,846 p=4826 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:38:31,847 p=4826 u=djdees n=ansible | RUNNING HANDLER [pihole : restart pihole-FTL] ***********************************************************************************
+2025-07-13 19:38:39,463 p=4826 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:38:39,474 p=4826 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-13 19:38:39,474 p=4826 u=djdees n=ansible | pihole                     : ok=28   changed=6    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+2025-07-13 19:45:06,190 p=4982 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-13 19:45:06,210 p=4982 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-13 19:45:11,208 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:11,222 p=4982 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-13 19:45:13,775 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:13,783 p=4982 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-13 19:45:17,583 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:17,590 p=4982 u=djdees n=ansible | TASK [network-config : Gather service facts to check for systemd-resolved] ******************************************************
+2025-07-13 19:45:30,897 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:30,910 p=4982 u=djdees n=ansible | TASK [network-config : Install systemd-resolved package if not installed (Debian/Ubuntu)] ***************************************
+2025-07-13 19:45:30,942 p=4982 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 19:45:30,952 p=4982 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] **********************************************************
+2025-07-13 19:45:34,553 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:34,565 p=4982 u=djdees n=ansible | TASK [network-config : Deploy systemd-resolved configuration] *******************************************************************
+2025-07-13 19:45:37,102 p=4982 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:45:37,112 p=4982 u=djdees n=ansible | TASK [network-config : Wait for systemd-resolved stub file to exist] ************************************************************
+2025-07-13 19:45:38,422 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:38,433 p=4982 u=djdees n=ansible | TASK [network-config : Check if /etc/resolv.conf exists and is a symlink] *******************************************************
+2025-07-13 19:45:39,660 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:39,670 p=4982 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf if it is a symlink but not the systemd stub resolver] ****************************
+2025-07-13 19:45:40,908 p=4982 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:45:40,918 p=4982 u=djdees n=ansible | TASK [network-config : Create symlink for /etc/resolv.conf to systemd stub resolver if missing or incorrect] ********************
+2025-07-13 19:45:42,087 p=4982 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:45:42,098 p=4982 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-13 19:45:48,466 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:48,476 p=4982 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] *************************************************************************************
+2025-07-13 19:45:54,865 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:54,875 p=4982 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] *****************************************************************************************
+2025-07-13 19:45:57,269 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:57,280 p=4982 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-13 19:45:59,698 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:45:59,709 p=4982 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] ******************************************************************
+2025-07-13 19:46:00,858 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:46:00,869 p=4982 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] *************************************************************************
+2025-07-13 19:46:03,235 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:46:03,246 p=4982 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-13 19:46:06,096 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:46:06,107 p=4982 u=djdees n=ansible | TASK [pihole : Set random Pi-hole admin password if not already defined] ********************************************************
+2025-07-13 19:46:06,136 p=4982 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 19:46:06,175 p=4982 u=djdees n=ansible | TASK [pihole : Show generated Pi-hole admin password] ***************************************************************************
+2025-07-13 19:46:06,204 p=4982 u=djdees n=ansible | ok: [pihole] => {
+    "msg": "Pi-hole admin password for pihole is: changeme"
+}
+2025-07-13 19:46:06,215 p=4982 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-13 19:46:18,928 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:46:18,938 p=4982 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-13 19:46:25,116 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:46:25,128 p=4982 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-13 19:46:35,704 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:46:35,715 p=4982 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-13 19:46:36,923 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:46:36,933 p=4982 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf] ********************************************************************************
+2025-07-13 19:46:39,328 p=4982 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:46:39,339 p=4982 u=djdees n=ansible | TASK [pihole : Create systemd override directory for pihole-FTL] ****************************************************************
+2025-07-13 19:46:40,493 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:46:40,503 p=4982 u=djdees n=ansible | TASK [pihole : Deploy systemd override file for pihole-FTL to wait on unbound] **************************************************
+2025-07-13 19:46:42,866 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:46:42,882 p=4982 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] ***************************************************************
+2025-07-13 19:46:46,452 p=4982 u=djdees n=ansible | ok: [pihole]
+2025-07-13 19:46:46,463 p=4982 u=djdees n=ansible | RUNNING HANDLER [unbound : Restart systemd-resolved] ****************************************************************************
+2025-07-13 19:46:58,448 p=4982 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:46:58,448 p=4982 u=djdees n=ansible | RUNNING HANDLER [pihole : restart pihole-FTL] ***********************************************************************************
+2025-07-13 19:47:06,829 p=4982 u=djdees n=ansible | changed: [pihole]
+2025-07-13 19:47:06,841 p=4982 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-13 19:47:06,841 p=4982 u=djdees n=ansible | pihole                     : ok=28   changed=6    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+2025-07-13 20:50:10,602 p=5201 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-13 20:50:10,622 p=5201 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-13 20:50:15,612 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:50:15,624 p=5201 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-13 20:50:18,290 p=5201 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:50:18,297 p=5201 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-13 20:50:22,117 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:50:22,127 p=5201 u=djdees n=ansible | TASK [network-config : Gather service facts to check for systemd-resolved] ******************************************************
+2025-07-13 20:50:35,388 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:50:35,398 p=5201 u=djdees n=ansible | TASK [network-config : Install systemd-resolved package if not installed (Debian/Ubuntu)] ***************************************
+2025-07-13 20:50:35,425 p=5201 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 20:50:35,435 p=5201 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] **********************************************************
+2025-07-13 20:50:39,051 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:50:39,061 p=5201 u=djdees n=ansible | TASK [network-config : Deploy systemd-resolved configuration] *******************************************************************
+2025-07-13 20:50:41,490 p=5201 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:50:41,501 p=5201 u=djdees n=ansible | TASK [network-config : Wait for systemd-resolved stub file to exist] ************************************************************
+2025-07-13 20:50:42,804 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:50:42,819 p=5201 u=djdees n=ansible | TASK [network-config : Check if /etc/resolv.conf exists and is a symlink] *******************************************************
+2025-07-13 20:50:44,171 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:50:44,181 p=5201 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf if it is a symlink but not the systemd stub resolver] ****************************
+2025-07-13 20:50:45,418 p=5201 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:50:45,429 p=5201 u=djdees n=ansible | TASK [network-config : Create symlink for /etc/resolv.conf to systemd stub resolver if missing or incorrect] ********************
+2025-07-13 20:50:46,591 p=5201 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:50:46,603 p=5201 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-13 20:50:56,807 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:50:56,819 p=5201 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] *************************************************************************************
+2025-07-13 20:50:59,304 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:50:59,314 p=5201 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] *****************************************************************************************
+2025-07-13 20:51:01,712 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:01,723 p=5201 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-13 20:51:04,113 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:04,125 p=5201 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] ******************************************************************
+2025-07-13 20:51:05,271 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:05,281 p=5201 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] *************************************************************************
+2025-07-13 20:51:07,650 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:07,660 p=5201 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-13 20:51:15,768 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:15,803 p=5201 u=djdees n=ansible | TASK [pihole : Set random Pi-hole admin password if not already defined] ********************************************************
+2025-07-13 20:51:15,830 p=5201 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 20:51:15,841 p=5201 u=djdees n=ansible | TASK [pihole : Show generated Pi-hole admin password] ***************************************************************************
+2025-07-13 20:51:15,870 p=5201 u=djdees n=ansible | ok: [pihole] => {
+    "msg": "Pi-hole admin password for pihole is: changeme"
+}
+2025-07-13 20:51:15,880 p=5201 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-13 20:51:29,151 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:29,162 p=5201 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-13 20:51:35,790 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:35,801 p=5201 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-13 20:51:39,055 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:39,066 p=5201 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-13 20:51:40,272 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:40,282 p=5201 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf] ********************************************************************************
+2025-07-13 20:51:42,690 p=5201 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:51:42,701 p=5201 u=djdees n=ansible | TASK [pihole : Create systemd override directory for pihole-FTL] ****************************************************************
+2025-07-13 20:51:45,086 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:45,098 p=5201 u=djdees n=ansible | TASK [pihole : Deploy systemd override file for pihole-FTL to wait on unbound] **************************************************
+2025-07-13 20:51:47,493 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:47,503 p=5201 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] ***************************************************************
+2025-07-13 20:51:51,093 p=5201 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:51:51,104 p=5201 u=djdees n=ansible | RUNNING HANDLER [network-config : Restart networking] ***************************************************************************
+2025-07-13 20:51:55,018 p=5201 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:51:55,019 p=5201 u=djdees n=ansible | RUNNING HANDLER [network-config : Conditionally reboot system] ******************************************************************
+2025-07-13 20:51:55,054 p=5201 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 20:51:55,055 p=5201 u=djdees n=ansible | RUNNING HANDLER [unbound : Restart systemd-resolved] ****************************************************************************
+2025-07-13 20:51:59,264 p=5201 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:51:59,265 p=5201 u=djdees n=ansible | RUNNING HANDLER [pihole : restart pihole-FTL] ***********************************************************************************
+2025-07-13 20:52:05,300 p=5201 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:52:05,316 p=5201 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-13 20:52:05,316 p=5201 u=djdees n=ansible | pihole                     : ok=29   changed=8    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+2025-07-13 20:53:26,026 p=5352 u=djdees n=ansible | PLAY [Setup Pi-hole DNS server] *************************************************************************************************
+2025-07-13 20:53:26,051 p=5352 u=djdees n=ansible | TASK [Gathering Facts] **********************************************************************************************************
+2025-07-13 20:53:31,055 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:53:31,068 p=5352 u=djdees n=ansible | TASK [network-config : Configure static IP with systemd-networkd] ***************************************************************
+2025-07-13 20:53:33,660 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:53:33,667 p=5352 u=djdees n=ansible | TASK [network-config : Enable and start systemd-networkd] ***********************************************************************
+2025-07-13 20:53:37,484 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:53:37,492 p=5352 u=djdees n=ansible | TASK [network-config : Gather service facts to check for systemd-resolved] ******************************************************
+2025-07-13 20:53:50,755 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:53:50,765 p=5352 u=djdees n=ansible | TASK [network-config : Install systemd-resolved package if not installed (Debian/Ubuntu)] ***************************************
+2025-07-13 20:53:50,795 p=5352 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 20:53:50,805 p=5352 u=djdees n=ansible | TASK [network-config : Enable and start systemd-resolved (if present)] **********************************************************
+2025-07-13 20:53:58,223 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:53:58,236 p=5352 u=djdees n=ansible | TASK [network-config : Remove legacy /etc/systemd/resolved.conf if present] *****************************************************
+2025-07-13 20:53:59,504 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:53:59,514 p=5352 u=djdees n=ansible | TASK [network-config : Ensure systemd-resolved drop-in directory exists] ********************************************************
+2025-07-13 20:54:00,672 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:00,682 p=5352 u=djdees n=ansible | TASK [network-config : Deploy systemd-resolved DNS drop-in config] **************************************************************
+2025-07-13 20:54:04,503 p=5352 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:54:04,513 p=5352 u=djdees n=ansible | TASK [network-config : Check if /etc/resolv.conf exists and is a symlink] *******************************************************
+2025-07-13 20:54:05,775 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:05,786 p=5352 u=djdees n=ansible | TASK [network-config : Remove /etc/resolv.conf if it is a symlink but not the systemd stub resolver] ****************************
+2025-07-13 20:54:06,946 p=5352 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:54:06,956 p=5352 u=djdees n=ansible | TASK [network-config : Create symlink for /etc/resolv.conf to systemd stub resolver if missing or incorrect] ********************
+2025-07-13 20:54:08,130 p=5352 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:54:08,144 p=5352 u=djdees n=ansible | TASK [unbound : Install Unbound] ************************************************************************************************
+2025-07-13 20:54:14,400 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:14,410 p=5352 u=djdees n=ansible | TASK [unbound : Deploy Unbound main config] *************************************************************************************
+2025-07-13 20:54:16,797 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:16,807 p=5352 u=djdees n=ansible | TASK [unbound : Deploy home LAN config] *****************************************************************************************
+2025-07-13 20:54:19,872 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:19,883 p=5352 u=djdees n=ansible | TASK [unbound : Deploy local zone records] **************************************************************************************
+2025-07-13 20:54:22,279 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:22,290 p=5352 u=djdees n=ansible | TASK [unbound : Create systemd override directory for unbound] ******************************************************************
+2025-07-13 20:54:23,436 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:23,446 p=5352 u=djdees n=ansible | TASK [unbound : Install Unbound systemd limit override] *************************************************************************
+2025-07-13 20:54:26,912 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:26,923 p=5352 u=djdees n=ansible | TASK [unbound : Download root hints file] ***************************************************************************************
+2025-07-13 20:54:29,729 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:29,739 p=5352 u=djdees n=ansible | TASK [pihole : Set random Pi-hole admin password if not already defined] ********************************************************
+2025-07-13 20:54:29,766 p=5352 u=djdees n=ansible | skipping: [pihole]
+2025-07-13 20:54:29,777 p=5352 u=djdees n=ansible | TASK [pihole : Show generated Pi-hole admin password] ***************************************************************************
+2025-07-13 20:54:29,804 p=5352 u=djdees n=ansible | ok: [pihole] => {
+    "msg": "Pi-hole admin password for pihole is: changeme"
+}
+2025-07-13 20:54:29,815 p=5352 u=djdees n=ansible | TASK [pihole : Update apt cache] ************************************************************************************************
+2025-07-13 20:54:42,783 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:42,793 p=5352 u=djdees n=ansible | TASK [pihole : Install dependencies] ********************************************************************************************
+2025-07-13 20:54:48,946 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:48,956 p=5352 u=djdees n=ansible | TASK [pihole : Download Pi-hole install script] *********************************************************************************
+2025-07-13 20:54:59,121 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:54:59,133 p=5352 u=djdees n=ansible | TASK [pihole : Run Pi-hole install script unattended] ***************************************************************************
+2025-07-13 20:55:00,353 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:55:00,363 p=5352 u=djdees n=ansible | TASK [pihole : Deploy customized setupVars.conf] ********************************************************************************
+2025-07-13 20:55:02,745 p=5352 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:55:02,756 p=5352 u=djdees n=ansible | TASK [pihole : Create systemd override directory for pihole-FTL] ****************************************************************
+2025-07-13 20:55:04,698 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:55:04,711 p=5352 u=djdees n=ansible | TASK [pihole : Deploy systemd override file for pihole-FTL to wait on unbound] **************************************************
+2025-07-13 20:55:07,091 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:55:07,129 p=5352 u=djdees n=ansible | TASK [pihole : Ensure Pi-hole FTL service is started and enabled] ***************************************************************
+2025-07-13 20:55:10,710 p=5352 u=djdees n=ansible | ok: [pihole]
+2025-07-13 20:55:10,722 p=5352 u=djdees n=ansible | RUNNING HANDLER [unbound : Restart systemd-resolved] ****************************************************************************
+2025-07-13 20:55:20,189 p=5352 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:55:20,189 p=5352 u=djdees n=ansible | RUNNING HANDLER [pihole : restart pihole-FTL] ***********************************************************************************
+2025-07-13 20:55:27,084 p=5352 u=djdees n=ansible | changed: [pihole]
+2025-07-13 20:55:27,095 p=5352 u=djdees n=ansible | PLAY RECAP **********************************************************************************************************************
+2025-07-13 20:55:27,096 p=5352 u=djdees n=ansible | pihole                     : ok=29   changed=6    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   

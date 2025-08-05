@@ -1,0 +1,34 @@
+- name: Deploy customized setupVars.conf
+  template:
+    src: setupVars.conf.j2
+    dest: /etc/pihole/setupVars.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart pihole-FTL
+  become: true
+
+- name: Create systemd override directory for pihole-FTL
+  file:
+    path: /etc/systemd/system/pihole-FTL.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Deploy systemd override file for pihole-FTL to wait on unbound
+  copy:
+    dest: /etc/systemd/system/pihole-FTL.service.d/override.conf
+    content: |
+      [Unit]
+      After=unbound.service
+      Wants=unbound.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - daemon-reexec
+    - restart pihole-FTL
+  become: true

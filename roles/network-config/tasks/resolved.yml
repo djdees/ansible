@@ -1,0 +1,70 @@
+---
+- name: Gather service facts to check for systemd-resolved
+  service_facts:
+  become: true
+
+- name: Install systemd-resolved package if not installed (Debian/Ubuntu)
+  apt:
+    name: systemd-resolved
+    state: present
+    update_cache: yes
+  become: true
+  when: "'systemd-resolved.service' not in ansible_facts.services"
+
+- name: Enable and start systemd-resolved (if present)
+  systemd:
+    name: systemd-resolved
+    state: started
+    enabled: yes
+  become: true
+  when: "'systemd-resolved.service' in ansible_facts.services"
+
+- name: Remove legacy /etc/systemd/resolved.conf if present
+  file:
+    path: /etc/systemd/resolved.conf
+    state: absent
+  become: true
+  when: "'systemd-resolved.service' in ansible_facts.services"
+
+- name: Ensure systemd-resolved drop-in directory exists
+  file:
+    path: /etc/systemd/resolved.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+  when: "'systemd-resolved.service' in ansible_facts.services"
+
+- name: Deploy systemd-resolved DNS drop-in config
+  template:
+    src: resolved.conf.j2
+    dest: /etc/systemd/resolved.conf.d/dns.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart systemd-resolved
+  become: true
+  when: "'systemd-resolved.service' in ansible_facts.services"
+
+- name: Check if /etc/resolv.conf exists and is a symlink
+  stat:
+    path: /etc/resolv.conf
+    follow: false
+  register: resolv_conf_stat
+  become: true
+
+- name: Remove /etc/resolv.conf if it is a symlink but not the systemd stub resolver
+  file:
+    path: /etc/resolv.conf
+    state: absent
+  when: resolv_conf_stat.stat.islnk and resolv_conf_stat.stat.lnk_source != '/run/systemd/resolve/stub-resolv.conf'
+  become: true
+
+- name: Create symlink for /etc/resolv.conf to systemd stub resolver if missing or incorrect
+  file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+  when: (not resolv_conf_stat.stat.exists) or (resolv_conf_stat.stat.lnk_source != '/run/systemd/resolve/stub-resolv.conf')
+  become: true

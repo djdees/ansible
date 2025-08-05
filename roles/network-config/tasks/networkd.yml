@@ -1,0 +1,17 @@
+---
+- name: Configure static IP with systemd-networkd
+  template:
+    src: static.network.j2
+    dest: /etc/systemd/network/eth0.network
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart networking
+  become: true
+
+- name: Enable and start systemd-networkd
+  systemd:
+    name: systemd-networkd
+    enabled: yes
+    state: started
+  become: true

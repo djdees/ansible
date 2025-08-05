@@ -1,0 +1,21 @@
+- name: Create systemd override directory for pihole-FTL
+  file:
+    path: /etc/systemd/system/pihole-FTL.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Add systemd override to make pihole-FTL depend on unbound
+  copy:
+    dest: /etc/systemd/system/pihole-FTL.service.d/override.conf
+    content: |
+      [Unit]
+      After=unbound.service
+      Wants=unbound.service
+  owner: root
+  group: root
+  mode: '0644'
+  notify: daemon-reexec
+  become: true

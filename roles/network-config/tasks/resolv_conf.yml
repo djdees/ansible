@@ -1,0 +1,20 @@
+---
+- name: Wait for systemd-resolved stub file to exist
+  wait_for:
+    path: /run/systemd/resolve/stub-resolv.conf
+    state: present
+    timeout: 10
+  become: true
+
+- name: Remove /etc/resolv.conf file or symlink
+  file:
+    path: /etc/resolv.conf
+    state: absent
+  become: true
+
+- name: Create symlink for /etc/resolv.conf to systemd-resolved stub resolver
+  file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+  become: true

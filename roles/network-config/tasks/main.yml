@@ -1,59 +1,9 @@
-- name: Configure static IP with systemd-networkd
-  template:
-    src: static.network.j2
-    dest: /etc/systemd/network/eth0.network
-    owner: root
-    group: root
-    mode: '0644'
-  notify: Restart networking
-  become: true
+---
+- import_tasks: networkd.yml
   tags:
     - networking
 
-- name: Enable and start systemd-networkd
-  systemd:
-    name: systemd-networkd
-    enabled: yes
-    state: started
-  become: true
+- import_tasks: resolved.yml
   tags:
     - networking
 
-- name: Gather service facts
-  service_facts:
-  tags:
-    - networking
-
-- name: Start and enable systemd-resolved (if present)
-  systemd:
-    name: systemd-resolved
-    state: started
-    enabled: true
-  become: true
-  when: "'systemd-resolved.service' in ansible_facts.services"
-  tags:
-    - networking
-
-- name: Remove /etc/resolv.conf symlink if it exists
-  file:
-    path: /etc/resolv.conf
-    state: absent
-  become: true
-  when: ansible_facts['ansible_facts']['files']['/etc/resolv.conf']['islnk'] is defined and ansible_facts['ansible_facts']['files']['/etc/resolv.conf']['islnk']
-  tags:
-    - networking
-
-- name: Configure /etc/resolv.conf
-  copy:
-    dest: /etc/resolv.conf
-    content: |
-      nameserver {{ dns_servers[0] }}
-      nameserver {{ dns_servers[1] }}
-      nameserver {{ dns_servers[2] }}
-    owner: root
-    group: root
-    mode: '0644'
-    backup: yes
-  become: true
-  tags:
-    - networking

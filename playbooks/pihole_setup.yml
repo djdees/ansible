@@ -2,5 +2,6 @@
 - name: Setup Pi-hole DNS server
   hosts: piholes
   become: true
+  gather_facts: true
   roles:
     - pihole
